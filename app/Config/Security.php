@@ -84,12 +84,9 @@ class Security extends BaseConfig
 	 * Allowed values are: None - Lax - Strict - ''.
 	 *
 	 * Defaults to `Lax` as recommended in this link:
-	 *
 	 * @see https://portswigger.net/web-security/csrf/samesite-cookies
 	 *
-	 * @var string
-	 *
-	 * @deprecated
+       * @var string 'Lax'|'None'|'Strict'
 	 */
 	public $samesite = 'Lax';
 }
