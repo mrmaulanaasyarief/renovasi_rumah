@@ -40,7 +40,7 @@
                         }
                 
                     ?>
-                    <input type="text" class="form-control" id="jenis_jasa_desain" name="jenis_jasa_desain" value="<?= $nama?>" placeholder="Diisi dengan jenis desain">
+                    <input type="text" class="form-control" id="jenis_jasa_desain" name="jenis_jasa_desain" value="<?= $jenis_jasa_desain?>" placeholder="Diisi dengan jenis desain">
                 </div>
                 <div class="mb-3">
                 <label for="tipe_desain" class="form-label">Tipe desain</label>
