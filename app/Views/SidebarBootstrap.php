@@ -21,7 +21,7 @@
               <li><a class="dropdown-item" href="<?= base_url('Customer/listcustomer') ?>">Customer</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Pegawai/listpegawai') ?>">Pegawai</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Material/Daftarmaterial') ?>">Material</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('Alat/listalat') ?>">Supplier</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('Supplier/listsupplier') ?>">Supplier</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
