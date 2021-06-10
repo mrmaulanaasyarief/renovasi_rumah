@@ -12,7 +12,7 @@ class Modules extends BaseModules
 	 * --------------------------------------------------------------------------
 	 *
 	 * If true, then auto-discovery will happen across all elements listed in
-	 * $aliases below. If false, no auto-discovery will happen at all,
+	 * $activeExplorers below. If false, no auto-discovery will happen at all,
 	 * giving a slight performance boost.
 	 *
 	 * @var boolean
