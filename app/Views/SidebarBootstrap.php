@@ -19,8 +19,9 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= base_url('Pegawai/listpegawai') ?>">Pegawai  </a></li>
               <li><a class="dropdown-item" href="<?= base_url('Customer/listcustomer') ?>">Customer</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('Supplier/listsupplier') ?>">Supplier</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('Kendaraan/listkendaraan') ?>">Kendaraan</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('Bahan/listbahan') ?>">Bahan</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('Alat/listalat') ?>">Alat</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('jasadesain/listjasadesain') ?>">jasa desain</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
@@ -33,9 +34,9 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= base_url('pemesanan') ?>">Pemesanan</a></li>
               <li><a class="dropdown-item" href="<?= base_url('pembayaran') ?>">Pembayaran</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('pemesanan/perubahan') ?>">Perubahan Status</a></li>
             </ul>
         </li>
-
 
           <li class="nav-item">
             <a class="nav-link" href="#">

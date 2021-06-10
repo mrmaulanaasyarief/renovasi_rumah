@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Input Pemesanan Renovasi </h1>
+        <h1 class="h2">Input Pemesanan Desain </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -24,21 +24,25 @@
         <div class="row">
         <?= form_open('pemesanan/prosesInput') ?>
                 <div class="mb-3">
-                <label for="id_customer" class="form-label">Nama Customer</label>
-                    <select class="form-select" aria-label="Default select example" id="id_customer" name="id_customer">
+                <label for="id_jasa_desain" class="form-label">Pilih Jenis Jasa</label>
+                    <select class="form-select" aria-label="Default select example" id="id_jasa_desain" name="id_jasa_desain">
                         <?php
                             //looping penghuni
-                            foreach($customer as $row):
-                                $id_customer = $row->id_customer;
-                                $nama = $row->nama;
-                                $alamat = $row->alamat;
-                                if(set_value('id_customer')==$id_customer){
+                            foreach($jasa_desain as $row):
+                                $id_jasa_desain = $row->id_jasa_desain;
+                               
+                                
+                              
+
+                                $jenis_jasa_desain = $row->jenis_jasa_desain;
+                                $tipe_desain = $row->tipe_desain;
+                                if(set_value('id_jasa_desain')==$id_jasa_desain){
                                   ?>
-                                    <option value="<?= $id_customer ?>" selected><?= $nama.' ('.$alamat.')'?></option>
+                                    <option value="<?= $id_jasa_desain ?>" selected><?= $jenis_jasa_desain.' ('.$tipe_desain.')'?></option>
                                   <?php
                                 }else{
                                   ?>
-                                    <option value="<?= $id_customer ?>"><?= $nama.' ('.$alamat.')' ?></option>
+                                    <option value="<?= $id_jasa_desain ?>"><?= $jenis_jasa_desain.' ('.$tipe_desain.')' ?></option>
                                   <?php
                                 }
                             endforeach;
@@ -46,17 +50,18 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="tgl_pesan">Tanggal Pesan Renovasi</label>
+                    <label for="tgl_pesan">Tanggal Pesan Desain</label>
                     <input type="date" class="form-control" id="tgl_pesan" name="tgl_pesan" value="<?= set_value('tgl_pesan')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
                 </div>
+               
                 <div class="mb-3">
-                    <label for="tgl_renovasi">Tanggal Mulai Renovasi</label>
-                    <input type="date" class="form-control" id="tgl_renovasi" name="tgl_renovasi" value="<?= set_value('tgl_renovasi')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
+                    <label for="tgl_desain">Tanggal Mulai Desain</label>
+                    <input type="date" class="form-control" id="tgl_desain" name="tgl_desain" value="<?= set_value('tgl_desain')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
                 </div>
                 <div class="mb-3">
-                    <label for="jenis_renovasi">Jenis Renovasi</label>
-                    <input type="text" class="form-control" id="jenis_renovasi" name="jenis_renovasi" onchange="myFunction()" placeholder="Diisi jenis renovasi yang dipilih">
-                </div>               
+                    <label for="harga_awal">Harga Awal</label>
+                    <input type="text" class="form-control" id="harga_awal" name="harga_awal" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
+                </div>
                 <div class="mb-3">
                     <label for="harga_deal">Harga Jadi</label>
                     <input type="text" class="form-control" id="harga_deal" name="harga_deal" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
@@ -65,7 +70,7 @@
                     <label for="besar_bayar">Pembayaran DP/Pelunasan</label>
                     <input type="text" class="form-control" id="besar_bayar" name="besar_bayar" value="<?= set_value('besar_bayar')?>" onchange="myFunction()" placeholder="Diisi dengan besar pembayaran">
                 </div>
-                <button type="submit" class="btn btn-primary">Pesan</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
 
