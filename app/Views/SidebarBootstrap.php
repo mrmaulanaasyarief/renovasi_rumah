@@ -21,7 +21,7 @@
               <li><a class="dropdown-item" href="<?= base_url('Customer/listcustomer') ?>">Customer</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Bahan/listbahan') ?>">Bahan</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Alat/listalat') ?>">Alat</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('jasadesain/listjasadesain') ?>">jasa desain</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('jasadesain/listjasadesain') ?>">Jasa Desain</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
