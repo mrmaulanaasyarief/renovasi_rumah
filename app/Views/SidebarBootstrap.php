@@ -17,7 +17,7 @@
             Master Data
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?= base_url('Pegawai/listpegawai') ?>">Pegawai  </a></li>
+              <li><a class="dropdown-item" href="<?= base_url('Pegawai/listpegawai') ?>">Pegawai</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Customer/listcustomer') ?>">Customer</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Bahan/listbahan') ?>">Bahan</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Alat/listalat') ?>">Alat</a></li>
