@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Pesanan Jasa Desain</h1>
+        <h1 class="h2">Pesan Material</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -15,22 +15,21 @@
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
 
-      
       <div class="row">
       <?php
               $i = 1;
-              foreach($jasa_desain as $row):
+              foreach($alatbahan as $row):
                 if(fmod($i,3)==0){
                   ?> 
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['jenis_jasa_desain']." (ID = ".$row['id_jasa_desain'].")";?>
+                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['tipe_desain'];?>
+                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
                                     </p>
                                     
-                                    <a href="<?= base_url('Pemesanan/InputPemesanan'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
+                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
                                 </div>
                             </div>
                         </div>
@@ -43,11 +42,11 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['jenis_jasa_desain']." (ID = ".$row['id_jasa_desain'].")";?>
+                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['tipe_desain'];?>
+                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
                                     </p>
-                                    <a href="<?= base_url('Pemesanan/InputPemesanan/'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
+                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
                                     
                                 </div>
                             </div>

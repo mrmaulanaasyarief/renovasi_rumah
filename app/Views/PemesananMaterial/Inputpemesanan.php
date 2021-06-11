@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Input Pemesanan Desain </h1>
+        <h1 class="h2">Input Pemesanan Material </h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -22,27 +22,24 @@
         
       ?>
         <div class="row">
-        <?= form_open('pemesanan/prosesInput') ?>
+        <?= form_open('PemesananMaterial/prosesInput') ?>
+        <input type="hidden" id="nama" name="nama" value="<?= $nama?>">
                 <div class="mb-3">
-                <label for="id_jasa_desain" class="form-label">Pilih Jenis Jasa</label>
-                    <select class="form-select" aria-label="Default select example" id="id_jasa_desain" name="id_jasa_desain">
+                <label for="id_material" class="form-label">Pilih Material</label>
+                    <select class="form-select" aria-label="Default select example" id="id_material" name="id_material">
                         <?php
                             //looping penghuni
-                            foreach($jasa_desain as $row):
-                                $id_jasa_desain = $row->id_jasa_desain;
-                               
-                                
-                              
-
-                                $jenis_jasa_desain = $row->jenis_jasa_desain;
-                                $tipe_desain = $row->tipe_desain;
-                                if(set_value('id_jasa_desain')==$id_jasa_desain){
+                            foreach($material as $row):
+                                $id = $row->id_material;
+                                $nama = $row->nama;
+                                $satuan = $row->satuan;
+                                if(set_value('id_material')==$id){
                                   ?>
-                                    <option value="<?= $id_jasa_desain ?>" selected><?= $jenis_jasa_desain.' ('.$tipe_desain.')'?></option>
+                                    <option value="<?= $id ?>" selected><?= $nama.' ('.$satuan.')'?></option>
                                   <?php
                                 }else{
                                   ?>
-                                    <option value="<?= $id_jasa_desain ?>"><?= $jenis_jasa_desain.' ('.$tipe_desain.')' ?></option>
+                                    <option value="<?= $id ?>"><?= $nama.' ('.$satuan.')' ?></option>
                                   <?php
                                 }
                             endforeach;
@@ -50,21 +47,20 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="tgl_pesan">Tanggal Pesan Desain</label>
-                    <input type="date" class="form-control" id="tgl_pesan" name="tgl_pesan" value="<?= set_value('tgl_pesan')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
+                    <label for="tanggal_pesan">Tanggal Pesan Material</label>
+                    <input type="date" class="form-control" id="tanggal_pesan" name="tanggal_pesan" value="<?= set_value('tanggal_pesan')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
                 </div>
-               
                 <div class="mb-3">
-                    <label for="tgl_desain">Tanggal Mulai Desain</label>
-                    <input type="date" class="form-control" id="tgl_desain" name="tgl_desain" value="<?= set_value('tgl_desain')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
+                    <label for="tanggal_ambil">Tanggal Ambil Material</label>
+                    <input type="date" class="form-control" id="tanggal_ambil" name="tanggal_ambil" value="<?= set_value('tanggal_ambil')?>" placeholder="Diisi dengan tanggal" onchange="myFunction()">
                 </div>
                 <div class="mb-3">
                     <label for="harga_awal">Harga Awal</label>
-                    <input type="text" class="form-control" id="harga_awal" name="harga_awal" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
+                    <input type="text" class="form-control" id="harga_awal" name="harga_awal" value="<?= number_format($harga)?>" disabled>
                 </div>
                 <div class="mb-3">
-                    <label for="harga_deal">Harga Jadi</label>
-                    <input type="text" class="form-control" id="harga_deal" name="harga_deal" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
+                    <label for="total_trans">Harga Jadi</label>
+                    <input type="text" class="form-control" id="total_trans" name="total_trans" value="<?= set_value('total_trans')?>" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
                 </div>
                 <div class="mb-3">
                     <label for="besar_bayar">Pembayaran DP/Pelunasan</label>
@@ -74,7 +70,6 @@
             </form>
         </div>
 
-     
     </main>
   </div>
 </div>
@@ -87,7 +82,7 @@
 		$(document).ready(function(){
 			// Format mata uang.
 			$('#besar_bayar').mask('0,000,000,000,000,000', {reverse: true});		
-      $('#harga_deal').mask('0,000,000,000,000,000', {reverse: true});	
+      $('#total_trans').mask('0,000,000,000,000,000', {reverse: true});	
 			
 		})
 	 </script> 
@@ -126,34 +121,11 @@
 
   //fungsi untuk mengganti nilai sesuai dengan pilihan user
   function myFunction(){
-    //memilih elemen 
-    var tgl_selesai = document.getElementById("tgl_selesai"); 
-    var tgl_awal = document.getElementById("tgl_mulai"); 
-    var tgl_selesai2 = document.getElementById("tgl_selesai2");
-    var harga_awal = document.getElementById("harga_awal"); //mengambil elemen harga_awal
+    //memilih elemen  
+    var tanggal_pesan = document.getElementById("tanggal_pesan"); 
 
     //menghilangkan karakter selian numerik
     //harga_awal_bersih =harga_awal.value.replaceAll(".", "");
-
-    var pembagi = 1;
-    if(Number(durasi)==6){
-      pembagi = 2; //harga per tahun dibagi 2
-    }else if(Number(durasi)==1){
-      pembagi = 12; //harga per tahun dibagi 12
-    }
-
-    //membagi harga dasar dengan 
-    harga_awal.setAttribute("value", number_format(Math.round(harga_awal_bersih/pembagi)) );
-    harga_awal.innerHTML = harga_awal_bersih/pembagi;
-
-    //menambahkan nilai penambahan tanggal awal dengan durasi yang dipilih lalu diisikan sbg atribut value di input form tgl_selesai
-    var dt = new Date(tgl_awal.value); 
-    dt.setMonth( dt.getMonth() + Number(durasi) );
-    tgl_selesai.setAttribute("value", dt.toISOString().substring(0, 10)); 
-    tgl_selesai2.setAttribute("value", dt.toISOString().substring(0, 10)); 
-
-
-
     //mengambil substring dari hasil toISOString berupa string 2021-09-05T00:00:00.000Z
 
     //var idx = document.getElementById("idx");
