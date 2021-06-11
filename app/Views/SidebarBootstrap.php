@@ -32,9 +32,13 @@
             Transaksi
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="<?= base_url('pemesanan') ?>">Pemesanan</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('pembayaran') ?>">Pembayaran</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('pemesanan/perubahan') ?>">Perubahan Status</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pemesanan Renovasi</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('PemesananJasaDesain') ?>">Pemesanan Jasa Desain</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pemesanan Pegawai</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pemesanan Material</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pembayaran</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Perubahan Status</a></li>
             </ul>
         </li>
 
