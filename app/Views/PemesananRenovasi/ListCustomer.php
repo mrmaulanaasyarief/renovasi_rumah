@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Pesan Material</h1>
+        <h1 class="h2">Pesanan Customer</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -13,59 +13,34 @@
         </div>
       </div>
 
-      <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
+      <div class="container">
+        <table class="table table-responsive">
+            <thead>
+                <th>Id Pesanan</th>
+                <th>Id Customer</th>
+                <th>Tanggal Pesan</th>
+                <th>Tanggal Renovasi</th>
+                <th>Jenis Renovasi</th>
+                <th>Status Bayar</th>
+                <th>Harga</th>
+            </thead>
 
-      <div class="row">
-      <?php
-              $i = 1;
-              foreach($alatbahan as $row):
-                if(fmod($i,3)==0){
-                  ?> 
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
-                                    </h5>
-                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
-                                    </p>
-                                    
-                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$id_renovasi.'/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
-                                </div>
-                            </div>
-                        </div>
-                        <p>
-                      </div>  
-                      <div class="row">
-                  <?php
-                }else{
-                  ?>
-                        <div class="col">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
-                                    </h5>
-                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
-                                    </p>
-                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$id_renovasi.'/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
+            <tbody>
+            <?php foreach($customer as $row){?>
+                <tr>
+                    <td><?= $row['id_pesan']?></td>
+                    <td><?= $row['id_customer']?></td>
+                    <td><?= $row['tgl_pesan']?></td>
+                    <td><?= $row['tgl_renovasi']?></td>
+                    <td><?= $row['jenis_renovasi']?></td>
+                    <td><?= $row['status_bayar']?></td>
+                    <td><?= rupiah($row['harga_deal'])?></td>
+                </tr>
+            </tbody>
 
-                      
-                  <?php
-                } 
-                $i = $i + 1; 
-              endforeach;    
-              //echo count($koskosan);
-      ?>
-            </div>
-
-              <?php
-                  //menampilkan sesi nama
-                  //echo $_SESSION['nama'];
-              ?>
-     
+            <?php } ?>
+        <table>
+      </div>
     </main>
   </div>
 </div>

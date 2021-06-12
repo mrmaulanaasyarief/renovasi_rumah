@@ -30,7 +30,7 @@
                                     <p class="card-text"><?= $row['tipe_desain'];?>
                                     </p>
                                     
-                                    <a href="<?= base_url('PemesananJasaDesain/InputPemesanan'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
+                                    <a href="<?= base_url('PemesananJasaDesain/InputPemesanan/'.$id_renovasi.'/'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                     </h5>
                                     <p class="card-text"><?= $row['tipe_desain'];?>
                                     </p>
-                                    <a href="<?= base_url('PemesananJasaDesain/InputPemesanan/'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
+                                    <a href="<?= base_url('PemesananJasaDesain/InputPemesanan/'.$id_renovasi.'/'.$row['id_jasa_desain'].'/'.$row['jenis_jasa_desain']) ?>" class="btn btn-primary">Pesan Desain</a>
                                     
                                 </div>
                             </div>

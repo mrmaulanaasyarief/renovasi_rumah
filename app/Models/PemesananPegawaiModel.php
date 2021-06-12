@@ -14,6 +14,7 @@ class PemesananPegawaiModel extends Model
 
     //untuk memasukkan data pemesanan
     public function insertData(){
+        $id_renovasi= $_POST['id_renovasi'];
         $id_pegawai = $_POST['id_pegawai'];
         //echo $id_penghuni;
 
@@ -39,6 +40,7 @@ class PemesananPegawaiModel extends Model
         //masukkan ke pemesanan
         
         $sql = "INSERT INTO pemesanan_pegawai SET 
+            id_renovasi=?,
             id_pegawai=?, 
             tanggal_pesan=?, 
             tanggal_kerja=?,
@@ -49,6 +51,7 @@ class PemesananPegawaiModel extends Model
             status_gaji=?
         ";
         $hasil = $this->db->query($sql, array(
+            $id_renovasi,
             $id_pegawai,
             $tanggal_pesan,
             $tanggal_kerja,
@@ -59,9 +62,9 @@ class PemesananPegawaiModel extends Model
             $status_gaji
         ));
 
-        $sql = "SELECT * FROM pemesanan_pegawai WHERE id_pegawai=? AND tanggal_pesan=? AND tanggal_kerja=? AND jumlah_hari=? AND gaji=? AND total_gaji=? AND total_bayar=? AND status_gaji=?
+        $sql = "SELECT * FROM pemesanan_pegawai WHERE id_renovasi=? AND id_pegawai=? AND tanggal_pesan=? AND tanggal_kerja=? AND jumlah_hari=? AND gaji=? AND total_gaji=? AND total_bayar=? AND status_gaji=?
         ";
-        $hasil = $this->db->query($sql, array($id_pegawai,$tanggal_pesan,$tanggal_kerja,$jumlah_hari,$gaji,$total_gaji,$total_bayar,$status_gaji));
+        $hasil = $this->db->query($sql, array($id_renovasi, $id_pegawai,$tanggal_pesan,$tanggal_kerja,$jumlah_hari,$gaji,$total_gaji,$total_bayar,$status_gaji));
 
         foreach($hasil->getResultArray() as $row){
             $id_pesan= $row['id_pesan'];

@@ -13,6 +13,7 @@ class PemesananJasaDesainModel extends Model
 
     //untuk memasukkan data pemesanan_jasa_desain
     public function insertData(){
+        $id_renovasi= $_POST['id_renovasi'];
         $id_jasa_desain= $_POST['id_jasa_desain'];
         $tgl_pesan = $_POST['tgl_pesan'];
         $tgl_desain = $_POST['tgl_desain'];
@@ -32,10 +33,10 @@ class PemesananJasaDesainModel extends Model
         }
 
         //masukkan ke pemesanan_jasa_desain
-        $sql = "INSERT INTO pemesanan_jasa_desain SET id_jasa_desain=?, tgl_pesan=?, tgl_desain=?, 
+        $sql = "INSERT INTO pemesanan_jasa_desain SET id_renovasi=?, id_jasa_desain=?, tgl_pesan=?, tgl_desain=?, 
                 status_bayar=?,harga_deal=?
         ";
-        $hasil = $this->db->query($sql, array($id_jasa_desain, $tgl_pesan, $tgl_desain, $status_bayar, $harga_deal));
+        $hasil = $this->db->query($sql, array($id_renovasi, $id_jasa_desain, $tgl_pesan, $tgl_desain, $status_bayar, $harga_deal));
 
         //dapatkan data id_pemesanan
         $dbResult = $this->db->query("SELECT MAX(id_pesan) as id_pesan FROM pemesanan_jasa_desain WHERE id_jasa_desain = ? ", array($id_jasa_desain));

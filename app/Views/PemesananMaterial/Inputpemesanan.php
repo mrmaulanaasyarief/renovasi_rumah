@@ -25,6 +25,9 @@
         <?= form_open('PemesananMaterial/prosesInput') ?>
         <input type="hidden" id="nama" name="nama" value="<?= $nama?>">
                 <div class="mb-3">
+                    <input type="hidden" class="form-control" id="id_renovasi" name="id_renovasi" value="<?= $id_renovasi?>">
+                </div>
+                <div class="mb-3">
                 <label for="id_material" class="form-label">Pilih Material</label>
                     <select class="form-select" aria-label="Default select example" id="id_material" name="id_material">
                         <?php

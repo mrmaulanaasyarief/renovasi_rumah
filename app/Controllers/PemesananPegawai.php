@@ -15,7 +15,7 @@ class PemesananPegawai extends BaseController
         $this->PegawaiModel = new PegawaiModel();
     }
 
-    public function index(){
+    public function index($id_renovasi = NULL){
 
         //tambahkan pengecekan login
         //if(!isset($_SESSION['nama'])){
@@ -23,6 +23,7 @@ class PemesananPegawai extends BaseController
         //}
 
         $data['pegawai'] = $this->PegawaiModel->getAll();
+        $data['id_renovasi'] = $id_renovasi;
 
         $ar = array();
         $i = 0;
@@ -40,13 +41,13 @@ class PemesananPegawai extends BaseController
     }
 
     //input pemesanan
-    public function inputpemesanan($id_pegawai){
+    public function inputpemesanan($id_renovasi, $id_pegawai){
         //tambahkan pengecekan login
         //if(!isset($_SESSION['nama'])){
         //    return redirect()->to(base_url('home')); 
         //}
 
-        
+        $data['id_renovasi'] = $id_renovasi;
         $data['id_pegawai'] = $id_pegawai;
         //print_r($id_pegawai);
         

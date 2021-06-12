@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Pesan Material</h1>
+        <h1 class="h2">Pesanan Renovasi Customer</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -15,21 +15,22 @@
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
 
+      
       <div class="row">
       <?php
               $i = 1;
-              foreach($alatbahan as $row):
+              foreach($customer as $row):
                 if(fmod($i,3)==0){
                   ?> 
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
+                                    <h5 class="card-title"><?= ucfirst($row['nama'])." (ID = ".$row['id_customer'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
+                                    <p class="card-text"><?= ucfirst($row['alamat']).' ('.$row['no_hp'].')';?>
                                     </p>
                                     
-                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$id_renovasi.'/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
+                                    <a href="<?= base_url('PemesananRenovasi/InputPemesanan'.$row['id_customer'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Renovasi</a>
                                 </div>
                             </div>
                         </div>
@@ -42,11 +43,11 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_material'].")";?>
+                                    <h5 class="card-title"><?= ucfirst($row['nama'])." (ID = ".$row['id_customer'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['satuan'].' ('.rupiah($row['harga']).')';?>
+                                    <p class="card-text"><?= ucfirst($row['alamat']).' ('.$row['no_hp'].')';?>
                                     </p>
-                                    <a href="<?= base_url('PemesananMaterial/InputPemesanan/'.$id_renovasi.'/'.$row['id_material'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Material</a>
+                                    <a href="<?= base_url('PemesananRenovasi/InputPemesanan/'.$row['id_customer'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Renovasi</a>
                                     
                                 </div>
                             </div>
@@ -59,6 +60,66 @@
               endforeach;    
               //echo count($koskosan);
       ?>
+            </div>
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Daftar Pesanan Renovasi</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          
+        </div>
+      </div>
+
+      <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
+            <div>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID Pesanan</th>
+                    <th scope="col">Tanggal Pesanan</th>
+                    <th scope="col">Nama Customer</th>
+                    <th scope="col">Tanggal Renovasi</th>
+                    <th scope="col">Jenis Renovasi</th>
+                    <th scope="col">Harga Deal</th>
+                    <th scope="col">Status Bayar</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                    foreach($renovasi as $row):
+                  ?>
+                  <tr>
+                    <th scope="row"><?= $row['id_pesan'] ?></th>
+                    <td><?= $row['tgl_pesan'] ?></td>
+                    <td><?php
+                      foreach($customer as $row2):
+                        if($row2['id_customer']==$row['id_customer']){
+                          echo(ucfirst($row2['nama']));
+                        }
+                      endforeach;?>
+                    </td>
+                    <td><?= $row['tgl_renovasi'] ?></td>
+                    <td><?= $row['jenis_renovasi'] ?></td>
+                    <td><?= rupiah($row['harga_deal']) ?></td>
+                    <td><?= $row['status_bayar'] ?></td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Tambah Pesanan
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="<?= base_url('PemesananJasaDesain/index/'.$row['id_pesan']) ?>">Pemesanan Jasa Desain</a>
+                          <a class="dropdown-item" href="<?= base_url('PemesananPegawai/index/'.$row['id_pesan']) ?>">Pemesanan Pegawai</a>
+                          <a class="dropdown-item" href="<?= base_url('PemesananMaterial/index/'.$row['id_pesan']) ?>">Pemesanan Material</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <?php
+                    endforeach;
+                  ?>
+                </tbody>
+              </table>
             </div>
 
               <?php

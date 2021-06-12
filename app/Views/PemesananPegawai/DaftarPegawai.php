@@ -30,7 +30,7 @@
                                     <p class="card-text"><?= $row['alamat_pegawai'].' ('.$row['telp_pegawai'].' ('.$row['jenis_pegawai'].')';?>
                                     </p>
                                     
-                                    <a href="<?= base_url('PemesananPegawai/InputPemesanan/'.$row['id_pegawai'].'/'.$row['nama_pegawai']) ?>" class="btn btn-primary">Pemesanan Pegawai</a>
+                                    <a href="<?= base_url('PemesananPegawai/InputPemesanan/'.$id_renovasi.'/'.$row['id_pegawai'].'/'.$row['nama_pegawai']) ?>" class="btn btn-primary">Pemesanan Pegawai</a>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                                     </h5>
                                     <p class="card-text"><?= $row['alamat_pegawai'].' ('.$row['telp_pegawai'].' ('.$row['jenis_pegawai'].')';?>
                                     </p>
-                                    <a href="<?= base_url('PemesananPegawai/InputPemesanan/'.$row['id_pegawai'].'/'.$row['nama_pegawai']) ?>" class="btn btn-primary">Pemesanan Pegawai</a>
+                                    <a href="<?= base_url('PemesananPegawai/InputPemesanan/'.$id_renovasi.'/'.$row['id_pegawai'].'/'.$row['nama_pegawai']) ?>" class="btn btn-primary">Pemesanan Pegawai</a>
                                     
                                 </div>
                             </div>

@@ -15,7 +15,7 @@ class PemesananMaterial extends BaseController
         $this->MaterialModel = new MaterialModel();
     }
 
-    public function index(){
+    public function index($id_renovasi = NULL){
 
         //tambahkan pengecekan login
         //if(!isset($_SESSION['nama'])){
@@ -23,6 +23,7 @@ class PemesananMaterial extends BaseController
         //}
 
         $data['alatbahan'] = $this->MaterialModel->getAll();
+        $data['id_renovasi'] = $id_renovasi;
 
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
@@ -30,11 +31,12 @@ class PemesananMaterial extends BaseController
     }
 
     //input PemesananMaterial
-    public function inputpemesanan($id_material){
+    public function inputpemesanan($id_renovasi, $id_material){
         //tambahkan pengecekan login
         //if(!isset($_SESSION['nama'])){
         //    return redirect()->to(base_url('home')); 
         //}
+        $data['id_renovasi'] = $id_renovasi;
         $data['id_material'] = $id_material;
         //print_r($id_pegawai);
         

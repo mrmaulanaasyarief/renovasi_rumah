@@ -22,7 +22,10 @@
         
       ?>
         <div class="row">
-        <?= form_open('PemesananPegawai/prosesInput') ?>    
+        <?= form_open('PemesananPegawai/prosesInput') ?> 
+                <div class="mb-3">
+                    <input type="hidden" class="form-control" id="id_renovasi" name="id_renovasi" value="<?= $id_renovasi?>">
+                </div>   
                 <div class="mb-3">
                     <input type="hidden" class="form-control" name="id_pegawai" value="<?= $id_pegawai ?>" ?>
                 </div>

@@ -15,9 +15,10 @@ class PemesananJasaDesain extends BaseController
         $this->JasadesainModel = new JasadesainModel();
     }
 
-    public function index(){
+    public function index($id_renovasi = NULL){
 
         $data['jasa_desain'] = $this->JasadesainModel->getAll();
+        $data['id_renovasi'] = $id_renovasi;
 
         $ar = array();
         $i = 0;
@@ -35,8 +36,9 @@ class PemesananJasaDesain extends BaseController
     }
 
     //input pemesanan
-    public function inputpemesanan($id_jasa_desain){
+    public function inputpemesanan($id_renovasi, $id_jasa_desain){
         
+        $data['id_renovasi'] = $id_renovasi;
         $data['id_jasa_desain'] = $id_jasa_desain;
         
         $hasil = $this->JasadesainModel->getJasadesainByIdJasadesain($id_jasa_desain);

@@ -14,6 +14,7 @@ class PemesananMaterialModel extends Model
 
     //untuk memasukkan data pemesanan
     public function insertData(){
+        $id_renovasi= $_POST['id_renovasi'];
         $id_material = $_POST['id_material'];
         $tanggal_pesan = $_POST['tanggal_pesan'];
         $tanggal_ambil = $_POST['tanggal_ambil'];
@@ -33,10 +34,10 @@ class PemesananMaterialModel extends Model
         }
 
         //masukkan ke pemesanan_material
-        $sql = "INSERT INTO pemesanan_material SET id_material=?, tanggal_pesan=?, tanggal_ambil=?, 
+        $sql = "INSERT INTO pemesanan_material SET id_renovasi=?, id_material=?, tanggal_pesan=?, tanggal_ambil=?, 
         status_bayar=?,total_trans=?
         ";
-        $hasil = $this->db->query($sql, array($id_material, $tanggal_pesan, $tanggal_ambil, $status_bayar, $total_trans));
+        $hasil = $this->db->query($sql, array($id_renovasi, $id_material, $tanggal_pesan, $tanggal_ambil, $status_bayar, $total_trans));
 
         return $hasil;
         //dapatkan data id_pemesanan
