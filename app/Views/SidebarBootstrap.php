@@ -34,7 +34,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pemesanan Renovasi</a></li>
               <li><a class="dropdown-item" href="<?= base_url('PemesananJasaDesain') ?>">Pemesanan Jasa Desain</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pemesanan Pegawai</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('PemesananPegawai') ?>">Pemesanan Pegawai</a></li>
               <li><a class="dropdown-item" href="<?= base_url('PemesananMaterial') ?>">Pemesanan Material</a></li>
               <li><a class="dropdown-item" href="<?= base_url('#') ?>">Pembayaran</a></li>
               <li><hr class="dropdown-divider"></li>
