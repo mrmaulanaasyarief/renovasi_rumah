@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Data Pembayaran <?=$jenis_pemesanan?></h1>
+        <h1 class="h2">Data Pembayaran</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -15,47 +15,14 @@
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
 
-      <p>
-    <div class="row">
-        <div class="col">
-            <div class="card">
-            <div class="card-header">
-                Informasi
-            </div>
-            <div class="card-body">
-            <?php 
-            $url = '';
-            if ($jenis_pemesanan == 'Renovasi'){ 
-              $url = base_url('pembayaran/inputpembayaran/'.$id_renov.'/'.$jenis_pemesanan);
-            }else{
-              $url = base_url('pembayaran/inputpembayaran/'.$id_renov.'/'.$jenis_pemesanan.'/'.$id_pemesanan);
-            }?>
-                <h5><?=$nama_customer?>, <?=$alamat_customer?> (<?=$no_hp_customer?>)</h5>
-                <p class="card-text ">Harga <?=$jenis_pemesanan?> = <?= rupiah($harga_deal) ?><br>
-                Total Bayar  = <?= rupiah($totalbayar) ?><br>
-                <?php if($sisa_bayar==0){
-                  echo '<b>Lunas</b>';
-                  echo '</p>';
-                }else{
-                ?>
-                  Sisa Bayar = <b><?= rupiah($sisa_bayar) ?></b>
-                </p>
-                <a href="<?= $url ?>" class="btn btn-warning" id="tmbh">Tambah Data Bayar</a>
-                <?php } ?>
-
-            </div>
-            </div>
-        </div>
-    </div>
-    <p>
       <div class="table-responsive">
       <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th>#Id</th>
-              <th>Jenis Pemesanan</th>
+              <th>#KTP</th>
+              <th>Nama</th>
+              <th>Kamar</th>
               <th>Tgl Bayar</th>
-              <th>Pembayaran</th>
               <th>No Kuitansi</th>
               <th>Aksi</th>
             </tr>
@@ -65,13 +32,13 @@
                     foreach($pembayaran as $row):
                         ?>
                             <tr>
-                                <td><?= $row->id_pembayaran;?></td>
-                                <td><?= $row->jenis_pemesanan;?></td>
-                                <td><?= $row->tgl_bayar;?></td>
-                                <td><?= rupiah($row->besar_bayar)?></td>
+                                <td><?= $row->ktp;?></td>
+                                <td><?= $row->nama_penghuni;?></td>
+                                <td><?= $row->nama_kos.":".$row->kmr?></td>
+                                <td><?= $row->tgl_bayar?></td>
                                 <td><?= $row->no_kuitansi?></td>
                                 <td>
-                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran).'/'.$nama_customer.'/'.$sisa_bayar ?>" class="btn btn-success" target="_blank">
+                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran) ?>" class="btn btn-success" target="_blank">
                                     <span data-feather="printer"></span> Cetak
                                   </a>
                                 </td>
@@ -147,7 +114,7 @@
             $(document).ready(function() {
                 $('#example').DataTable();
             } );
-      </script>
+    </script>
   
   </body>
 </html>

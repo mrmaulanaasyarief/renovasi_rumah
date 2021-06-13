@@ -84,7 +84,7 @@
                                 <td><?= rupiah($row->harga_deal)?></td>
                                 <td><?= $row->status_bayar?></td>
                                 <td>
-                                  <a href="<?= base_url('Pembayaran/ListPembayaran/'.$row->id_renovasi.'/JasaDesain/'.$row->id_pesan) ?>" class="btn btn-primary" target="_blank">
+                                  <a href="<?= base_url('Pembayaran/ListPembayaran/'.$row->id_renovasi.'/Jasa Desain/'.$row->id_pesan) ?>" class="btn btn-primary" target="_blank">
                                     <span data-feather="info"></span> Lihat Detail
                                   </a>
                                 </td>

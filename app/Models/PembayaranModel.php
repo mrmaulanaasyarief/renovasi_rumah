@@ -12,6 +12,15 @@ class PembayaranModel extends Model
         return $this->findAll();
     }
 
+    public function getById($id){
+        $sql = "SELECT *
+                FROM pembayaran
+                WHERE id_pembayaran = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id));
+        return $dbResult->getResult();       
+    }
+
     //method untuk menampilkan informasi data pembayaran
     public function getInfoPembayaran(){
         $sql = "SELECT c.id as id_penghuni, c.ktp, c.nama as nama_penghuni, e.id_kos, 

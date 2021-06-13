@@ -101,7 +101,7 @@ class Pembayaran extends BaseController
 
         if($jenis_pemesanan == 'Renovasi'){
             $data['harga_deal'] = $this->PemesananRenovasiModel->getHargaDeal($id_pemesanan);
-        }else if($jenis_pemesanan == 'JasaDesain'){
+        }else if($jenis_pemesanan == 'Jasa Desain'){
             $data['harga_deal'] = $this->PemesananJasaDesainModel->getHargaDeal($id_pemesanan);
         }else if($jenis_pemesanan == 'Material'){
             $data['harga_deal'] = $this->PemesananMaterialModel->getHargaDeal($id_pemesanan);
@@ -135,9 +135,9 @@ class Pembayaran extends BaseController
         $data['id_renov'] = $id_renov;
         $data['jenis_pemesanan'] = $jenis_pemesanan;
         $data['id_pemesanan'] = $id_pemesanan;
-        $data['harga_deal'] = rupiah($data['harga_deal']);
-        $data['totalbayar'] = rupiah($totalbayar);
-        $data['sisa_bayar'] = rupiah($sisa_bayar);
+        $data['harga_deal'] = $data['harga_deal'];
+        $data['totalbayar'] = $totalbayar;
+        $data['sisa_bayar'] = $sisa_bayar;
 
         // //dapatkan nomor kuitansinya
         // $nokuitansi = $this->PembayaranModel->getNoKuitansi($id_kos);
