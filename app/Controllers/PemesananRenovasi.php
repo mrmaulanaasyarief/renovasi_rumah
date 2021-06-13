@@ -77,7 +77,7 @@ class PemesananRenovasi extends BaseController
     
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('PemesananRenovasi/Inputpemesanan', $data);        
+            echo view('PemesananRenovasi/InputPemesanan', $data);        
     }
 
     //input pemesanan
@@ -106,23 +106,37 @@ class PemesananRenovasi extends BaseController
         $data['id_customer'] = $id_customer; //id kosan
         $data['nama'] = $nama;
         $data['alamat'] = $alamat;
+        $data['no_hp'] = $no_hp;
         
         //echo $data['id'];
         //print_r($data['penghuni']);
         
         //cek apakah awal diakses, kalau awal berarti seluruh isian field yg bukan select/field dari db harusnya kosong
-        if(isset($_POST['tgl_pesan']) and isset($_POST['besar_bayar'])){
+        if(isset(
+            $_POST['tgl_renovasi']) and 
+            isset($_POST['jenis_renovasi']) and
+            isset($_POST['harga_deal']) and
+            isset($_POST['besar_bayar']) 
+            ){
             //load fungsi validasi
             $validation =  \Config\Services::validation();
 
             if (! $this->validate(
                         [
-                                'tgl_pesan' => 'required',
+                                'tgl_renovasi' => 'required',
+                                'jenis_renovasi' => 'required',
+                                'harga_deal' => 'required',
                                 'besar_bayar' => 'required'
                         ],
                                 [   // Errors
-                                    'tgl_pesan' => [
+                                    'tgl_renovasi' => [
                                         'required' => 'Tanggal mulai tidak boleh kosong',
+                                    ],
+                                    'jenis_renovasi' => [
+                                        'required' => 'Jenis renovasi tidak boleh kosong',
+                                    ],
+                                    'harga_deal' => [
+                                        'required' => 'Harga jadi mulai tidak boleh kosong',
                                     ],
                                     'besar_bayar' => [
                                         'required' => 'Besar bayar tidak boleh kosong'
@@ -133,7 +147,7 @@ class PemesananRenovasi extends BaseController
                 //disini diisi kalau ada error
                 echo view('HeaderBootstrap');
                 echo view('SidebarBootstrap');
-                echo view('PemesananRenovasi/Inputpemesanan',[
+                echo view('PemesananRenovasi/InputPemesanan',[
                         'validation' => $this->validator,
                         'id_customer' => $data['id_customer'],
                         'nama' => $data['nama'],
@@ -167,7 +181,7 @@ class PemesananRenovasi extends BaseController
             //berarti kosong maka ditampilkan apa adanya, tidak perlu divalidasi
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('PemesananRenovasi/Inputpemesanan', $data);
+            echo view('PemesananRenovasi/InputPemesanan', $data);
         }
     }    
 }

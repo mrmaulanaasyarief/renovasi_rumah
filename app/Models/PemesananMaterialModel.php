@@ -12,6 +12,54 @@ class PemesananMaterialModel extends Model
         return $this->findAll();
     }
 
+    public function getById($id){
+        $sql = "SELECT *
+                FROM pemesanan_material
+                WHERE id_pesan = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id));
+        return $dbResult->getResult();
+    }
+
+    public function getHargaDeal($id){
+        $sql = "SELECT total_trans
+                FROM pemesanan_material
+                WHERE id_pesan = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id));
+        $hasil = $dbResult->getResult();
+        
+        foreach ($hasil as $row)
+		{
+			$harga_deal = $row->total_trans;
+		}
+        return $harga_deal;
+    }
+
+    public function getByRenovId($id_renovasi){
+        $sql = "SELECT *
+                FROM pemesanan_material
+                WHERE id_renovasi = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id_renovasi));
+        return $dbResult->getResult();
+    }
+
+    public function isRenov($id_renovasi){
+        $sql = "SELECT COUNT(1) AS jml
+                FROM pemesanan_material
+                WHERE id_renovasi = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id_renovasi));
+        
+        $hasil = $dbResult->getResult();
+        foreach ($hasil as $row)
+		{
+			$jml = $row->jml;
+		}
+        return $jml;
+    }
+
     //untuk memasukkan data pemesanan
     public function insertData(){
         $id_renovasi= $_POST['id_renovasi'];
@@ -39,31 +87,61 @@ class PemesananMaterialModel extends Model
         ";
         $hasil = $this->db->query($sql, array($id_renovasi, $id_material, $tanggal_pesan, $tanggal_ambil, $status_bayar, $total_trans));
 
-        return $hasil;
-        //dapatkan data id_pemesanan
-        // $dbResult = $this->db->query("SELECT MAX(id_pencatatan) as id_pencatatan FROM pencatatan_peg WHERE id_pegawai = ?", array($id_pegawai));
-        // $hasil = $dbResult->getResult();
-        // foreach ($hasil as $row)
-		// {
-		// 	$id_pencatatan = $row->id_pencatatan;
-		// }
+        if($besar_bayar>0){
 
-       /* //format nomor kuitansi
-        $nomor_kuitansi = "KWI-".date("Ymd")."-".$id_kos."-".str_pad(($urutan+1),3,"0",STR_PAD_LEFT); //-001;
-
-        //dapatkan id transaksi untuk pembayaran
-        $dbResult = $this->db->query("SELECT IFNULL(MAX(id_transaksi),0) as id_transaksi from view_transaksi");
-
-        $hasil = $dbResult->getResult();
-        //cacah hasilnya
-        foreach ($hasil as $row)
-        {
-            $id_transaksi = $row->id_transaksi;
+            //dapatkan data id_pemesanan
+            $dbResult = $this->db->query("SELECT MAX(id_pesan) as id_pesan FROM pemesanan_material WHERE id_material = ? ", array($id_material));
+            $hasil = $dbResult->getResult();
+            foreach ($hasil as $row)
+            {
+                $id_pesan = $row->id_pesan;
+            }
+            
+            //generate nomer kuitansi dengan format KWI-20190520-1-1-001
+            //KWI-THN_BLN_TGL-IDRENOVASI-IDPESAN-NOMOR_URUT
+            $sql = "SELECT substring(IFNULL(MAX(no_kuitansi),0),20)+0 as urutan FROM pembayaran 
+                     WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(no_kuitansi, '-', -3),'-',1) = ".$id_renovasi." 
+                     AND SUBSTRING_INDEX(SUBSTRING_INDEX(no_kuitansi, '-', -2),'-',1) = ".$id_pesan." 
+                     AND SUBSTRING(SUBSTRING_INDEX(no_kuitansi, '-', 2),5) = ".date("Ymd", strtotime($tanggal_pesan));
+            $dbResult = $this->db->query($sql);
+            $hasil = $dbResult->getResult();
+            foreach ($hasil as $row)
+            {
+                $urutan = $row->urutan;
+            }        
+    
+            //format nomor kuitansi
+            $nomor_kuitansi = "KWI-".date("Ymd", strtotime($tanggal_pesan))."-".($id_renovasi)."-".($id_pesan)."-".str_pad(($urutan+1),3,"0",STR_PAD_LEFT); //-001;
+    
+            // //dapatkan id transaksi untuk pembayaran
+            // $dbResult = $this->db->query("SELECT IFNULL(MAX(id_transaksi),+1) as id_transaksi from view_transaksi");
+    
+            // $hasil = $dbResult->getResult();
+            // //cacah hasilnya
+            // foreach ($hasil as $row)
+            // {
+            //     $id_transaksi = $row->id_transaksi;
+            // }
+            // $id_transaksi = $id_transaksi+1; //naikkan 1 untuk id baru modal yang dimasukkan
+    
+            //masukkan ke pembayaran
+            $sql = "INSERT INTO pembayaran SET 
+                        id_pemesanan = ?, 
+                        jenis_pemesanan = ?, 
+                        no_kuitansi=?, 
+                        tgl_bayar=?, 
+                        besar_bayar=?";
+            $hasil = $this->db->query($sql, 
+                array(
+                    $id_pesan, 
+                    'Material', 
+                    $nomor_kuitansi,
+                    $tanggal_pesan, 
+                    $besar_bayar)
+                );
         }
-        $id_transaksi = $id_transaksi+1; //naikkan 1 untuk id baru modal yang dimasukkan
+        
+        return $hasil;
 
-        //masukkan ke pembayaran
-        $sql = "INSERT INTO pembayaran_pegawai SET id_pembayaran=?, id_pencatatan = ?, no_kuitansi=?, tgl_bayar=CURRENT_DATE, besar_bayar=?";
-        $hasil = $this->db->query($sql, array($id_transaksi, $id_pesan, $nomor_kuitansi, $besar_bayar));*/
     }
 }

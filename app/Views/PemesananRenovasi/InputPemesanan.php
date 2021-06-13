@@ -25,24 +25,8 @@
         <?= form_open('PemesananRenovasi/prosesInput') ?>
                 <div class="mb-3">
                 <label for="id_customer" class="form-label">Nama Customer</label>
-                    <select class="form-select" aria-label="Default select example" id="id_customer" name="id_customer">
-                        <?php
-                            //looping penghuni
-                            foreach($customer as $row):
-                                $id_customer = $row->id_customer;
-                                $nama = $row->nama;
-                                $alamat = $row->alamat;
-                                if(set_value('id_customer')==$id_customer){
-                                  ?>
-                                    <option value="<?= $id_customer ?>" selected><?= $nama.' ('.$alamat.')'?></option>
-                                  <?php
-                                }else{
-                                  ?>
-                                    <option value="<?= $id_customer ?>"><?= $nama.' ('.$alamat.')' ?></option>
-                                  <?php
-                                }
-                            endforeach;
-                        ?>
+                    <select class="form-select" aria-label="Default select example" id="id_customer" name="id_customer">  
+                      <option value="<?= $id_customer ?>" selected><?= $nama.' ('.$alamat.')'?></option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -55,11 +39,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="jenis_renovasi">Jenis Renovasi</label>
-                    <input type="text" class="form-control" id="jenis_renovasi" name="jenis_renovasi" onchange="myFunction()" placeholder="Diisi jenis renovasi yang dipilih">
+                    <input type="text" class="form-control" id="jenis_renovasi" name="jenis_renovasi" value="<?= set_value('jenis_renovasi')?>" onchange="myFunction()" placeholder="Diisi jenis renovasi yang dipilih">
                 </div>               
                 <div class="mb-3">
                     <label for="harga_deal">Harga Jadi</label>
-                    <input type="text" class="form-control" id="harga_deal" name="harga_deal" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
+                    <input type="text" class="form-control" id="harga_deal" name="harga_deal" value="<?= set_value('harga_deal')?>" onchange="myFunction()" placeholder="Diisi harga kesepakatan">
                 </div>
                 <div class="mb-3">
                     <label for="besar_bayar">Pembayaran DP/Pelunasan</label>

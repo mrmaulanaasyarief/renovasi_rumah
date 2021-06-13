@@ -30,7 +30,7 @@
                                     <p class="card-text"><?= ucfirst($row['alamat']).' ('.$row['no_hp'].')';?>
                                     </p>
                                     
-                                    <a href="<?= base_url('PemesananRenovasi/InputPemesanan'.$row['id_customer'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Renovasi</a>
+                                    <a href="<?= base_url('PemesananRenovasi/InputPemesanan/'.$row['id_customer'].'/'.$row['nama']) ?>" class="btn btn-primary">Pesan Renovasi</a>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
               endforeach;    
               //echo count($koskosan);
       ?>
-            </div>
+      </div>
 
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Daftar Pesanan Renovasi</h1>
