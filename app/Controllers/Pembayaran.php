@@ -124,7 +124,7 @@ class Pembayaran extends BaseController
         echo view('Pembayaran/ListPesanan', $data);
     }
 
-    //list history pembayaran berdasarkan id kamar tertentu
+    //list history pembayaran berdasarkan 
     public function ListPembayaran($id_renov, $jenis_pemesanan, $id_pemesanan = NULL){
         helper('rupiah');
         //tambahkan pengecekan login

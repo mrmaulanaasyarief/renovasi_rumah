@@ -28,7 +28,7 @@
                     <select class="form-select" aria-label="Default select example" name="periode" id="periode">
                         <?php
                             foreach($tahun as $row):
-                                $namaBulan = array("","Januari","Februaru","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+                                $namaBulan = array("","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
                                 $tahun = $row->tahun;
                                 $bulan = $row->bulan;
                                 $bulan_angka = $row->bulan_angka;

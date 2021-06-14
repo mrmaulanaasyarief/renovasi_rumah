@@ -25,7 +25,7 @@ class Laporan extends BaseController
             return redirect()->to(base_url('home')); 
         }
 
-        $data['pembayaran'] = $this->PembayaranModel->getInfoPembayaran();
+        $data['pembayaran'] = $this->PembayaranModel->getLaporan();
 
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
@@ -134,9 +134,8 @@ class Laporan extends BaseController
         if(!isset($_SESSION['nama'])){
             return redirect()->to(base_url('home')); 
         }
-        // $data['laporan'] = $this->LaporanModel->getAll();
+        
         $data['tahun'] = $this->CoaModel->getPeriodeTahunBulan();
-        //$data['bulan'] = $this->LaporanModel->getPeriodeBulan();
 
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');

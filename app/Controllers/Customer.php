@@ -7,13 +7,16 @@ class Customer extends BaseController
 {
 	public function __construct()
     {
+        session_start();
         //load kelas AkunModel
         $this->customermodel = new CustomerModel();
     }
 
     public function index()
 	{
-
+        if(!isset($_SESSION['nama']) or $_SESSION['kelompok']=='admin' or $_SESSION['kelompok']=='pemilik'){
+            return redirect()->to(base_url('home')); 
+        }
         //cek dulu apakah kondisi form sudah diisi atau belum, kalau belum berarti tidak perlu memanggil fungsi validasi
         if(isset($_POST['nama']) and isset($_POST['alamat']) and isset($_POST['no_hp'])){
                 //
@@ -72,6 +75,9 @@ class Customer extends BaseController
 	}
 
     public function listcustomer(){
+        if(!isset($_SESSION['nama']) or $_SESSION['kelompok']=='admin' or $_SESSION['kelompok']=='pemilik'){
+            return redirect()->to(base_url('home')); 
+        }
         $data['customer'] = $this->customermodel->getAll();
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
@@ -79,6 +85,9 @@ class Customer extends BaseController
     }
 
     public function editcustomer($id){
+        if(!isset($_SESSION['nama']) or $_SESSION['kelompok']=='admin' or $_SESSION['kelompok']=='pemilik'){
+            return redirect()->to(base_url('home')); 
+        }
         $data['customer'] = $this->customermodel->editData($id);
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
@@ -86,6 +95,9 @@ class Customer extends BaseController
     }
 
     public function editcustomerproses(){
+        if(!isset($_SESSION['nama']) or $_SESSION['kelompok']=='admin' or $_SESSION['kelompok']=='pemilik'){
+            return redirect()->to(base_url('home')); 
+        }
         
         $id = $_POST['id_customer'];
         $nama = $_POST['nama'];
@@ -142,6 +154,9 @@ class Customer extends BaseController
     }
 
     public function deletecustomer($id){
+        if(!isset($_SESSION['nama']) or $_SESSION['kelompok']=='admin' or $_SESSION['kelompok']=='pemilik'){
+            return redirect()->to(base_url('home')); 
+        }
 		$this->customermodel->deleteData($id);
 
 		return redirect()->to(base_url('Customer/listcustomer')); 

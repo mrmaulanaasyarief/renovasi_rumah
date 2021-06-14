@@ -21,6 +21,15 @@ class PemesananSupplierModel extends Model
         return $dbResult->getResult();
     }
 
+    public function getSupplierId($id){
+        $sql = "SELECT *
+                FROM pemesanan_supplier
+                WHERE id_supplier = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id));
+        return $dbResult->getResult();
+    }
+
     public function getSupplierByIdPesan($id){
         $sql = "SELECT id_supplier
                 FROM pemesanan_supplier

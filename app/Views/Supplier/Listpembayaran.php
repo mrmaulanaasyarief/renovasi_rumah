@@ -41,7 +41,6 @@
                 ?>
                   Sisa Bayar = <b><?= rupiah($sisa_bayar) ?></b>
                 </p>
-                <a href="<?= $url ?>" class="btn btn-warning" id="tmbh">Tambah Data Bayar</a>
                 <?php } ?>
 
             </div>
@@ -72,7 +71,7 @@
                                 <td><?= rupiah($row->besar_bayar)?></td>
                                 <td><?= $row->no_kuitansi?></td>
                                 <td>
-                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran.'/'.$nama_customer.'/'.$sisa_bayar) ?>" class="btn btn-success" target="_blank">
+                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran).'/'.$nama_customer.'/'.$sisa_bayar ?>" class="btn btn-success" target="_blank">
                                     <span data-feather="printer"></span> Cetak
                                   </a>
                                 </td>

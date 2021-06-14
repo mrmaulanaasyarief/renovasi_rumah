@@ -32,13 +32,14 @@
                     foreach($pembayaran as $row):
                         ?>
                             <tr>
-                                <td><?= $row->ktp;?></td>
-                                <td><?= $row->nama_penghuni;?></td>
-                                <td><?= $row->nama_kos.":".$row->kmr?></td>
+                                <td><?= $row->id_pesan;?></td>
+                                <td><?= ucfirst($row->nama);?></td>
+                                <td><?= $row->jenis_pemesanan?></td>
                                 <td><?= $row->tgl_bayar?></td>
                                 <td><?= $row->no_kuitansi?></td>
                                 <td>
-                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran) ?>" class="btn btn-success" target="_blank">
+                                <?php $sisa_bayar = $row->harga_deal-$row->total_bayar ?>
+                                  <a href="<?= base_url('laporan/kuitansi/'.$row->id_pembayaran.'/'.ucfirst($row->nama).'/'.$sisa_bayar) ?>" class="btn btn-success" target="_blank">
                                     <span data-feather="printer"></span> Cetak
                                   </a>
                                 </td>

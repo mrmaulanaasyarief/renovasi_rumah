@@ -76,9 +76,13 @@ class CoaModel extends Model
     //get data posisi saldo normal
     public function getPosisiSaldoNormal($akun){
         //lihat posisi saldo awal normal
+        //==================================
+        // KODE AWAL TAPI ERROR
+        //==================================
         // $sql = "SELECT posisi_d_c
         //         FROM coa 
         //         WHERE kode_coa = ?";
+        //================================
         $sql = "SELECT j.posisi_d_c
                 FROM coa c
                 CROSS JOIN jurnal j

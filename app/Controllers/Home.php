@@ -40,12 +40,45 @@ class Home extends BaseController
 		foreach ($hasil as $row)
 		{
 			$jml = $row->jml;
-			$nama = $row->nama;
 		}
 		
-		$_SESSION['nama']  = $nama;
 		//nilai jml adalah 1 menunjukkan bahwa pasangan username dan password cocok
 		if($jml>0){	
+			//update last login
+			$hasil = $this->akunmodel->updatelastlogin();
+			
+			//dapat waktu last login
+			$hasil = $this->akunmodel->getlastlogin($_POST['inputUsername']);
+
+			$lastlogin = '';
+			foreach ($hasil as $row)
+			{
+				$lastlogin = $row->last_login;
+			}
+
+			//dapatkan kelompok user
+			$hasil = $this->akunmodel->getGroupUser($_POST['inputUsername']);
+			
+			$kelompok = '';
+			foreach ($hasil as $row)
+			{
+				$kelompok = $row->user_group;
+			}
+
+			//dapatkan id
+			$hasil = $this->akunmodel->getIdUser($_POST['inputUsername']);
+			
+			$id = '';
+			foreach ($hasil as $row)
+			{
+				$id = $row->id;
+			}
+
+			//ciptakan session
+			$_SESSION['nama']  = $_POST['inputUsername'];
+			$_SESSION['kelompok']  = $kelompok;
+			$_SESSION['lastlogin']  = $lastlogin;
+			$_SESSION['id']  = $id;
 
 			//jika pasangan sama maka diarahkan ke welcome page
 			//return view('welcome_message');

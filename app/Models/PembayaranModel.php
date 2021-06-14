@@ -21,6 +21,14 @@ class PembayaranModel extends Model
         return $dbResult->getResult();       
     }
 
+    public function getLaporan(){
+        $sql = "SELECT *
+                FROM v_laporan
+                ";
+        $dbResult = $this->db->query($sql, array());
+        return $dbResult->getResult();       
+    }
+
     //method untuk menampilkan informasi data pembayaran
     public function getInfoPembayaran(){
         $sql = "(SELECT pr.id_pesan, c.nama, pr.harga_deal, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan

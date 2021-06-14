@@ -17,10 +17,10 @@ class PemesananRenovasi extends BaseController
 
     public function index(){
 
-        //tambahkan pengecekan login
-        //if(!isset($_SESSION['nama'])){
-        //    return redirect()->to(base_url('home')); 
-        //}
+        // tambahkan pengecekan login
+        if(!isset($_SESSION['nama'])){
+           return redirect()->to(base_url('home')); 
+        }
 
         $data['customer'] = $this->CustomerModel->getAll();
         $data['renovasi'] = $this->PemesananRenovasiModel->getAll();
@@ -51,9 +51,9 @@ class PemesananRenovasi extends BaseController
     //input pemesanan
     public function inputpemesanan($id_customer){
         //tambahkan pengecekan login
-        //if(!isset($_SESSION['nama'])){
-        //    return redirect()->to(base_url('home')); 
-        //}
+        if(!isset($_SESSION['nama'])){
+           return redirect()->to(base_url('home')); 
+        }
 
         
         $data['id_customer'] = $id_customer;
@@ -75,17 +75,17 @@ class PemesananRenovasi extends BaseController
         $data['alamat'] = $alamat;
         $data['no_hp'] = $no_hp;
     
-            echo view('HeaderBootstrap');
-            echo view('SidebarBootstrap');
-            echo view('PemesananRenovasi/InputPemesanan', $data);        
+        echo view('HeaderBootstrap');
+        echo view('SidebarBootstrap');
+        echo view('PemesananRenovasi/InputPemesanan', $data);        
     }
 
     //input pemesanan
     public function prosesInput(){
        //tambahkan pengecekan login
-        //if(!isset($_SESSION['nama'])){
-        //   return redirect()->to(base_url('home')); 
-        //}
+        if(!isset($_SESSION['nama'])){
+          return redirect()->to(base_url('home')); 
+        }
 
         helper('rupiah');
         $data['id_customer'] = $_POST['id_customer'];

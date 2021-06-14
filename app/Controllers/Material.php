@@ -61,14 +61,14 @@ class Material extends BaseController
                     $data['alatbahan'] = $this->materialmodel->getAll();
                     echo view('HeaderBootstrap');
                     echo view('SidebarBootstrap');
-                    echo view('Material/Daftarmaterial', $data);
+                    echo view('material/Daftarmaterial', $data);
                 }    
                 //
         }else{
                     //kondisi awal ketika di akses, jadi tidak perlu memanggil validasi
                     echo view('HeaderBootstrap');
                     echo view('SidebarBootstrap');
-                    echo view('Material/Inputmaterial');
+                    echo view('material/Inputmaterial');
         }
 	}
 
@@ -76,14 +76,14 @@ class Material extends BaseController
         $data['alatbahan'] = $this->materialmodel->getAll();
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
-        echo view('Material/Daftarmaterial', $data);
+        echo view('material/Daftarmaterial', $data);
     }
 
     public function editmaterial($id){
         $data['alatbahan'] = $this->materialmodel->editData($id);
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
-        echo view('Material/Editmaterial', $data);
+        echo view('material/Editmaterial', $data);
     }
 
     public function editmaterialproses(){
@@ -119,7 +119,7 @@ class Material extends BaseController
             
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('Material/Editmaterial',[
+            echo view('material/Editmaterial',[
                 'validation' => $this->validator,
                 'alatbahan' => $this->materialmodel->editData($id)
             ]);
@@ -139,13 +139,13 @@ class Material extends BaseController
             $data['alatbahan'] = $this->materialmodel->getAll();
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('Material/Daftarmaterial', $data);
+            echo view('material/Daftarmaterial', $data);
         }    
     }
 
     public function deletematerial($id){
 		$this->materialmodel->deleteData($id);
 
-		return redirect()->to(base_url('Material/Daftarmaterial')); 
+		return redirect()->to(base_url('material/daftarmaterial')); 
 	}
 }
