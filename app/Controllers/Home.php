@@ -11,12 +11,17 @@ class Home extends BaseController
     {
         //load kelas AkunModel
         $this->akunmodel = new AkunModel();
+		session_start();
     }
 
 	public function index()
 	{
-		//return view('welcome_message');
-		echo view('login');
+		if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+		echo view('HeaderBootstrap');
+		echo view('SidebarBootstrap');
+		echo view('BodyBootstrap');
 	}
 
 	public function ceklogin()
@@ -27,8 +32,10 @@ class Home extends BaseController
 		foreach ($hasil as $row)
 		{
 			$jml = $row->jml;
+			$nama = $row->nama;
 		}
 		
+		$_SESSION['nama']  = $nama;
 		//nilai jml adalah 1 menunjukkan bahwa pasangan username dan password cocok
 		if($jml>0){	
 

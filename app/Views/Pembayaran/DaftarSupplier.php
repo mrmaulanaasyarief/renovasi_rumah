@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Pembayaran Pesanan Customer</h1>
+        <h1 class="h2">Pembayaran Pesanan Supplier</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -22,22 +22,18 @@
       <div class="row">
       <?php
               $i = 1;
-              foreach($pesananrenovasi as $row):
+              foreach($infopesanansuplier as $row):
                 if(fmod($i,3)==0){
                   ?> 
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <span class="badge bg-success rounded-pill">Renovasi</span>
-                                    <?php if ($infopesananrenovasi[$i-1][1]>0){?><span class="badge bg-success rounded-pill">Jasa Desain</span><?php } ?>
-                                    <?php if ($infopesananrenovasi[$i-1][2]>0){?><span class="badge bg-success rounded-pill">Pegawai</span><?php } ?>
-                                    <?php if ($infopesananrenovasi[$i-1][3]>0){?><span class="badge bg-success rounded-pill">Material</span><?php } ?>                                      
-                                    <h5 class="card-title"><?= ucfirst($infopesananrenovasi[$i-1][4])." (ID Renovasi = ".$row['id_pesan'].")";?>                                      
+                                    <h5 class="card-title"><?= $infopesanansuplier[$i-1][2]." (ID = ".$infopesanansuplier[$i-1][0].")";?>                                      
                                     </h5>
-                                    <p class="card-text"><?= ucfirst($infopesananrenovasi[$i-1][5]).' ('.$infopesananrenovasi[$i-1][6].')';?>
+                                    <p class="card-text"><?= $infopesanansuplier[$i-1][1].' ('.$infopesanansuplier[$i-1][4].')';?>
                                     </p>
                                     
-                                    <a href="<?= base_url('Pembayaran/ListPesanan/'.$row['id_pesan'].'/'.$infopesananrenovasi[$i-1][7]) ?>" class="btn btn-primary">Bayar Renovasi</a>
+                                    <a href="<?= base_url('Pembayaran/ListPembayaran/'.$infopesanansuplier[$i-1][0].'/'.$jenis_pemesanan) ?>" class="btn btn-primary">Bayar Supplier</a>
                                 </div>
                             </div>
                         </div>
@@ -50,15 +46,12 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <span class="badge bg-success rounded-pill">Renovasi</span>
-                                    <?php if ($infopesananrenovasi[$i-1][1]>0){?><span class="badge bg-success rounded-pill">Jasa Desain</span><?php } ?>
-                                    <?php if ($infopesananrenovasi[$i-1][2]>0){?><span class="badge bg-success rounded-pill">Pegawai</span><?php } ?>
-                                    <?php if ($infopesananrenovasi[$i-1][3]>0){?><span class="badge bg-success rounded-pill">Material</span><?php } ?>
-                                    <h5 class="card-title"><?= ucfirst($infopesananrenovasi[$i-1][4])." (ID Renovasi = ".$row['id_pesan'].")";?>
+                                    <h5 class="card-title"><?= $infopesanansuplier[$i-1][2]." (ID = ".$infopesanansuplier[$i-1][0].")";?>                                      
                                     </h5>
-                                    <p class="card-text"><?= ucfirst($infopesananrenovasi[$i-1][5]).' ('.$infopesananrenovasi[$i-1][6].')';?>
+                                    <p class="card-text"><?= $infopesanansuplier[$i-1][1].' ('.$infopesanansuplier[$i-1][4].')';?>
                                     </p>
-                                    <a href="<?= base_url('Pembayaran/ListPesanan/'.$row['id_pesan'].'/'.$infopesananrenovasi[$i-1][7]) ?>" class="btn btn-primary">Bayar Renovasi</a>
+                                    
+                                    <a href="<?= base_url('Pembayaran/ListPembayaran/'.$infopesanansuplier[$i-1][0].'/'.$jenis_pemesanan) ?>" class="btn btn-primary">Bayar Supplier</a>
                                 </div>
                             </div>
                         </div>

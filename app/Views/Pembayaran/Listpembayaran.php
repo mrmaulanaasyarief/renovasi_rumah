@@ -25,7 +25,7 @@
             <div class="card-body">
             <?php 
             $url = '';
-            if ($jenis_pemesanan == 'Renovasi'){ 
+            if ($jenis_pemesanan == 'Renovasi' or $jenis_pemesanan == 'Supplier'){ 
               $url = base_url('pembayaran/inputpembayaran/'.$id_renov.'/'.$jenis_pemesanan);
             }else{
               $url = base_url('pembayaran/inputpembayaran/'.$id_renov.'/'.$jenis_pemesanan.'/'.$id_pemesanan);

@@ -7,6 +7,7 @@ class Material extends BaseController
 {
 	public function __construct()
     {
+        session_start();
         //load kelas AkunModel
         $this->materialmodel = new MaterialModel();
     }
@@ -60,14 +61,14 @@ class Material extends BaseController
                     $data['alatbahan'] = $this->materialmodel->getAll();
                     echo view('HeaderBootstrap');
                     echo view('SidebarBootstrap');
-                    echo view('material/Daftarmaterial', $data);
+                    echo view('Material/Daftarmaterial', $data);
                 }    
                 //
         }else{
                     //kondisi awal ketika di akses, jadi tidak perlu memanggil validasi
                     echo view('HeaderBootstrap');
                     echo view('SidebarBootstrap');
-                    echo view('material/Inputmaterial');
+                    echo view('Material/Inputmaterial');
         }
 	}
 
@@ -75,14 +76,14 @@ class Material extends BaseController
         $data['alatbahan'] = $this->materialmodel->getAll();
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
-        echo view('material/Daftarmaterial', $data);
+        echo view('Material/Daftarmaterial', $data);
     }
 
     public function editmaterial($id){
         $data['alatbahan'] = $this->materialmodel->editData($id);
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
-        echo view('material/Editmaterial', $data);
+        echo view('Material/Editmaterial', $data);
     }
 
     public function editmaterialproses(){
@@ -118,7 +119,7 @@ class Material extends BaseController
             
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('material/Editmaterial',[
+            echo view('Material/Editmaterial',[
                 'validation' => $this->validator,
                 'alatbahan' => $this->materialmodel->editData($id)
             ]);
@@ -138,13 +139,13 @@ class Material extends BaseController
             $data['alatbahan'] = $this->materialmodel->getAll();
             echo view('HeaderBootstrap');
             echo view('SidebarBootstrap');
-            echo view('material/Daftarmaterial', $data);
+            echo view('Material/Daftarmaterial', $data);
         }    
     }
 
     public function deletematerial($id){
 		$this->materialmodel->deleteData($id);
 
-		return redirect()->to(base_url('material/daftarmaterial')); 
+		return redirect()->to(base_url('Material/Daftarmaterial')); 
 	}
 }

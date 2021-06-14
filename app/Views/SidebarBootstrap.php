@@ -22,8 +22,6 @@
               <li><a class="dropdown-item" href="<?= base_url('Pegawai/ListPegawai') ?>">Pegawai</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Material/DaftarMaterial') ?>">Material</a></li>
               <li><a class="dropdown-item" href="<?= base_url('Supplier/ListSupplier') ?>">Supplier</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
@@ -33,11 +31,13 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= base_url('PemesananRenovasi') ?>">Pemesanan Renovasi</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('PemesananSupplier') ?>">Pemesanan Supplier</a></li>
               <!--<li><a class="dropdown-item" href="<?= base_url('PemesananJasaDesain') ?>">Pemesanan Jasa Desain</a></li>
               <li><a class="dropdown-item" href="<?= base_url('PemesananPegawai') ?>">Pemesanan Pegawai</a></li>
               <li><a class="dropdown-item" href="<?= base_url('PemesananMaterial') ?>">Pemesanan Material</a></li>-->
+              <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="<?= base_url('Pembayaran') ?>">Pembayaran</a></li>
-              <!-- <li><hr class="dropdown-divider"></li> -->
+              <li><a class="dropdown-item" href="<?= base_url('Pembayaran/Supplier') ?>">Pembayaran Supplier</a></li>
               <!-- <li><a class="dropdown-item" href="<?= base_url('#') ?>">Perubahan Status</a></li> -->
             </ul>
         </li>

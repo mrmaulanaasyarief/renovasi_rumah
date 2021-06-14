@@ -5,7 +5,9 @@ use App\Models\PemesananRenovasiModel;
 use App\Models\PemesananJasaDesainModel;
 use App\Models\PemesananPegawaiModel;
 use App\Models\PemesananMaterialModel;
+use App\Models\PemesananSupplierModel;
 use App\Models\CustomerModel;
+use App\Models\SupplierModel;
 use App\Models\PembayaranModel;
 
 
@@ -18,16 +20,18 @@ class Pembayaran extends BaseController
         $this->PemesananJasaDesainModel = new PemesananJasaDesainModel();
         $this->PemesananPegawaiModel = new PemesananPegawaiModel();
         $this->PemesananMaterialModel = new PemesananMaterialModel();
+        $this->PemesananSupplierModel = new PemesananSupplierModel();
         $this->CustomerModel = new CustomerModel();
+        $this->SupplierModel = new SupplierModel();
         $this->PembayaranModel = new PembayaranModel();
     }
 
     public function index()
 	{
-		//tambahkan pengecekan login
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
+		// tambahkan pengecekan login
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
 
         $data['pesananrenovasi'] = $this->PemesananRenovasiModel->getAll();
         
@@ -57,6 +61,40 @@ class Pembayaran extends BaseController
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
         echo view('Pembayaran/DaftarRenovasi', $data);
+	}
+
+    public function Supplier()
+	{
+		// tambahkan pengecekan login
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+
+        $data['pesanansuplier'] = $this->PemesananSupplierModel->getAll();
+        
+        $ar = [];
+
+        $i = 0;
+        foreach($data['pesanansuplier'] as $row):
+            array_push($ar, array($row['id_pesan'],$row['id_supplier'],'','','')); //inisialisasi array [1],[2],[3] dengan 0
+            $i++;
+        endforeach;
+
+        for($i=0;$i<count($ar);$i++){
+            $supplier = $this->SupplierModel->getById($ar[$i][1]);
+            foreach($supplier as $row):
+                $ar[$i][2] = $row->nama_supplier;
+                $ar[$i][3] = $row->alamat_supplier;
+                $ar[$i][4] = $row->telepon_supplier;
+            endforeach;
+        }
+        //hasil array jumlah data kosan
+        $data['infopesanansuplier'] = $ar;
+        $data['jenis_pemesanan'] = 'Supplier';
+
+        echo view('HeaderBootstrap');
+        echo view('SidebarBootstrap');
+        echo view('Pembayaran/DaftarSupplier', $data);
 	}
 
     //listPesanan
@@ -101,6 +139,8 @@ class Pembayaran extends BaseController
 
         if($jenis_pemesanan == 'Renovasi'){
             $data['harga_deal'] = $this->PemesananRenovasiModel->getHargaDeal($id_pemesanan);
+        }else if($jenis_pemesanan == 'Supplier'){
+            $data['harga_deal'] = $this->PemesananSupplierModel->getHargaDeal($id_pemesanan);
         }else if($jenis_pemesanan == 'Jasa Desain'){
             $data['harga_deal'] = $this->PemesananJasaDesainModel->getHargaDeal($id_pemesanan);
         }else if($jenis_pemesanan == 'Material'){
@@ -121,14 +161,24 @@ class Pembayaran extends BaseController
         endforeach;
         $sisa_bayar= $data['harga_deal']-$totalbayar;
 
-        $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($id_renov);
-        foreach($data['customer'] as $row):
-            $id_customer = $row->id_customer;
-            $nama = $row->nama;
-            $alamat = $row->alamat;
-            $no_hp = $row->no_hp;
-        endforeach;
-
+        if($jenis_pemesanan == 'Supplier'){
+            $data['supplier'] = $this->PemesananSupplierModel->getSupplierByIdPesan($id_renov);
+            foreach($data['supplier'] as $row):
+                $id_customer = $row->id_supplier;
+                $nama = $row->nama_supplier;
+                $alamat = $row->alamat_supplier;
+                $no_hp = $row->telepon_supplier;
+            endforeach;
+        }else{
+            $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($id_renov);
+            foreach($data['customer'] as $row):
+                $id_customer = $row->id_customer;
+                $nama = $row->nama;
+                $alamat = $row->alamat;
+                $no_hp = $row->no_hp;
+            endforeach;
+        }
+        
         $data['nama_customer'] = ucfirst($nama);
         $data['alamat_customer'] = ucfirst($alamat);
         $data['no_hp_customer'] = $no_hp;
@@ -166,7 +216,9 @@ class Pembayaran extends BaseController
 
         if($jenis_pemesanan == 'Renovasi'){
             $data['harga_deal'] = $this->PemesananRenovasiModel->getHargaDeal($id_pemesanan);
-        }else if($jenis_pemesanan == 'JasaDesain'){
+        }else if($jenis_pemesanan == 'Supplier'){
+            $data['harga_deal'] = $this->PemesananSupplierModel->getHargaDeal($id_pemesanan);
+        }else if($jenis_pemesanan == 'Jasa Desain'){
             $data['harga_deal'] = $this->PemesananJasaDesainModel->getHargaDeal($id_pemesanan);
         }else if($jenis_pemesanan == 'Material'){
             $data['harga_deal'] = $this->PemesananMaterialModel->getHargaDeal($id_pemesanan);
@@ -186,13 +238,23 @@ class Pembayaran extends BaseController
         endforeach;
         $sisa_bayar= $data['harga_deal']-$totalbayar;
 
-        $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($id_renov);
-        foreach($data['customer'] as $row):
-            $id_customer = $row->id_customer;
-            $nama = $row->nama;
-            $alamat = $row->alamat;
-            $no_hp = $row->no_hp;
-        endforeach;
+        if($jenis_pemesanan == 'Supplier'){
+            $data['supplier'] = $this->PemesananSupplierModel->getSupplierByIdPesan($id_renov);
+            foreach($data['supplier'] as $row):
+                $id_customer = $row->id_supplier;
+                $nama = $row->nama_supplier;
+                $alamat = $row->alamat_supplier;
+                $no_hp = $row->telepon_supplier;
+            endforeach;
+        }else{
+            $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($id_renov);
+            foreach($data['customer'] as $row):
+                $id_customer = $row->id_customer;
+                $nama = $row->nama;
+                $alamat = $row->alamat;
+                $no_hp = $row->no_hp;
+            endforeach;
+        }
 
         $data['nama_customer'] = ucfirst($nama);
         $data['id_renov'] = $id_renov;
@@ -286,13 +348,23 @@ class Pembayaran extends BaseController
                 endforeach;
                 $sisa_bayar= $data['harga_deal']-$totalbayar;
         
-                $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($data['id_renov']);
-                foreach($data['customer'] as $row):
-                    $id_customer = $row->id_customer;
-                    $nama = $row->nama;
-                    $alamat = $row->alamat;
-                    $no_hp = $row->no_hp;
-                endforeach;
+                if($jenis_pemesanan == 'Supplier'){
+                    $data['supplier'] = $this->PemesananSupplierModel->getSupplierByIdPesan($data['id_renov']);
+                    foreach($data['supplier'] as $row):
+                        $id_customer = $row->id_supplier;
+                        $nama = $row->nama_supplier;
+                        $alamat = $row->alamat_supplier;
+                        $no_hp = $row->telepon_supplier;
+                    endforeach;
+                }else{
+                    $data['customer'] = $this->PemesananRenovasiModel->getCustomerByIdRenov($data['id_renov']);
+                    foreach($data['customer'] as $row):
+                        $id_customer = $row->id_customer;
+                        $nama = $row->nama;
+                        $alamat = $row->alamat;
+                        $no_hp = $row->no_hp;
+                    endforeach;
+                }
         
                 $data['nama_customer'] = ucfirst($nama);
                 $data['alamat_customer'] = ucfirst($alamat);
@@ -300,9 +372,9 @@ class Pembayaran extends BaseController
                 // $data['id_renov'] = $id_renov;
                 // $data['jenis_pemesanan'] = $jenis_pemesanan;
                 // $data['id_pemesanan'] = $id_pemesanan;
-                $data['harga_deal'] = rupiah($data['harga_deal']);
-                $data['totalbayar'] = rupiah($totalbayar);
-                $data['sisa_bayar'] = rupiah($sisa_bayar);
+                $data['harga_deal'] = $data['harga_deal'];
+                $data['totalbayar'] = $totalbayar;
+                $data['sisa_bayar'] = $sisa_bayar;
 
                 echo view('HeaderBootstrap');
                 echo view('SidebarBootstrap');

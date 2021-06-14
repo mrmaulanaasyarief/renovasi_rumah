@@ -28,8 +28,8 @@
                                     <h5 class="card-title"><?= $row['jenis_jasa_desain']." (ID = ".$row['id_jasa_desain'].")";?></h5>
                                     <p class="card-text"><?= $row['tipe_desain'];?></p>
                                     <a href="#" class="btn btn-primary">Lihat Detail Jasa desain</a>
-                                    <a href="<?= base_url('Jasadesain/editjasadesain/'.$row['id_jasa_desain']) ?>" class="btn btn-success">Ubah</a>
-                                    <a onclick="deleteConfirm('<?php echo base_url('Jasadesain/deletejasadesain/'.$row['id_jasa_desain']) ?>')" href="#" class="btn btn-danger" role="button" aria-pressed="true">Hapus</a>
+                                    <a href="<?= base_url('JasaDesain/editJasaDesain/'.$row['id_jasa_desain']) ?>" class="btn btn-success">Ubah</a>
+                                    <a onclick="deleteConfirm('<?php echo base_url('JasaDesain/DeleteJasadesain/'.$row['id_jasa_desain']) ?>')" href="#" class="btn btn-danger" role="button" aria-pressed="true">Hapus</a>
                                 </div>
                             </div>
                         </div>
@@ -45,8 +45,8 @@
                                     <h5 class="card-title"><?= $row['jenis_jasa_desain']." (ID = ".$row['id_jasa_desain'].")";?></h5>
                                     <p class="card-text"><?= $row['tipe_desain'];?></p>
                                     <a href="#" class="btn btn-primary">Lihat Detail jasa desain</a>
-                                    <a href="<?= base_url('Jasadesain/editjasadesain/'.$row['id_jasa_desain']) ?>" class="btn btn-success">Ubah</a>
-                                    <a onclick="deleteConfirm('<?php echo base_url('Jasadesain/deletejasadesain/'.$row['id_jasa_desain']) ?>')" href="#" class="btn btn-danger" role="button" aria-pressed="true">Hapus</a>
+                                    <a href="<?= base_url('JasaDesain/editJasaDesain/'.$row['id_jasa_desain']) ?>" class="btn btn-success">Ubah</a>
+                                    <a onclick="deleteConfirm('<?php echo base_url('JasaDesain/deleteJasaDesain/'.$row['id_jasa_desain']) ?>')" href="#" class="btn btn-danger" role="button" aria-pressed="true">Hapus</a>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
               <div class="col">
                   <div class="card">
                     <div class="card-body">
-                    <a href="<?= base_url('jasadesain') ?>" class="btn btn-warning" id="tmbh">Tambah Data jasa desain</a>
+                    <a href="<?= base_url('JasaDesain') ?>" class="btn btn-warning" id="tmbh">Tambah Data jasa desain</a>
                     </div>
                   </div>
               </div>

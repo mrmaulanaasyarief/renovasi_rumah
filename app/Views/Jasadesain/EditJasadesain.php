@@ -28,7 +28,7 @@
         endforeach;
       ?>
         <div class="row">
-        <?= form_open('jasadesain/editjasadesainproses') ?>
+        <?= form_open('JasaDesain/editjasadesainproses') ?>
             
             <input type="hidden" id="id_jasa_desain" name="id_jasa_desain" value="<?= $id?>">
                 <div class="mb-3">

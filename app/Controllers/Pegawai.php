@@ -7,6 +7,7 @@ class Pegawai extends BaseController
 {
 	public function __construct()
     {
+        session_start();
         //load kelas AkunModel
         $this->pegawaimodel = new PegawaiModel();
     }

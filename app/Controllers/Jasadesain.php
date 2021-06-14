@@ -1,14 +1,15 @@
 <?php
 namespace App\Controllers;
 
-use App\Models\JasadesainModel;
+use App\Models\JasaDesainModel;
 
 class Jasadesain extends BaseController
 {
 	public function __construct()
     {
+        session_start();
         //load kelas AkunModel
-        $this->jasadesainmodel = new JasadesainModel();
+        $this->jasadesainmodel = new JasaDesainModel();
     }
 
     public function index()
@@ -137,6 +138,6 @@ class Jasadesain extends BaseController
     public function deletejasadesain($id){
 		$this->jasadesainmodel->deleteData($id);
 
-		return redirect()->to(base_url('Jasadesain/listJasadesain')); 
+		return redirect()->to(base_url('JasaDesain/listJasadesain')); 
 	}
 }

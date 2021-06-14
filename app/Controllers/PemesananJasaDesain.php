@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use App\Models\PemesananJasaDesainModel;
-use App\Models\JasadesainModel;
+use App\Models\JasaDesainModel;
 
 class PemesananJasaDesain extends BaseController
 {
@@ -12,12 +12,12 @@ class PemesananJasaDesain extends BaseController
 
         //load kelas PenghuniModel dan KosanModel
         $this->PemesananJasaDesainModel = new PemesananJasaDesainModel();
-        $this->JasadesainModel = new JasadesainModel();
+        $this->JasaDesainModel = new JasaDesainModel();
     }
 
     public function index($id_renovasi = NULL){
 
-        $data['jasa_desain'] = $this->JasadesainModel->getAll();
+        $data['jasa_desain'] = $this->JasaDesainModel->getAll();
         $data['id_renovasi'] = $id_renovasi;
 
         $ar = array();
@@ -41,7 +41,7 @@ class PemesananJasaDesain extends BaseController
         $data['id_renovasi'] = $id_renovasi;
         $data['id_jasa_desain'] = $id_jasa_desain;
         
-        $hasil = $this->JasadesainModel->getJasadesainByIdJasadesain($id_jasa_desain);
+        $hasil = $this->JasaDesainModel->getJasadesainByIdJasadesain($id_jasa_desain);
 
         foreach($hasil as $row):
             $id = $row->id_jasa_desain;
@@ -69,7 +69,7 @@ class PemesananJasaDesain extends BaseController
         
 
         //print_r($id_kamar);
-        $hasil = $this->JasadesainModel->getJasadesainByIdJasadesain($data['id_jasa_desain']);
+        $hasil = $this->JasaDesainModel->getJasadesainByIdJasadesain($data['id_jasa_desain']);
 
         foreach ($hasil as $row):
             $id = $row->id_jasa_desain;
@@ -135,7 +135,7 @@ class PemesananJasaDesain extends BaseController
                     </script>
                     <?php	
                 }
-                $data['jasa_desain'] = $this->JasadesainModel->getAll();
+                $data['jasa_desain'] = $this->JasaDesainModel->getAll();
 
                 $hasil = $this->PemesananJasaDesainModel->getAll();
 

@@ -1,6 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Pilih Kosan</h1>
+        <h1 class="h2">Pesan Supplier</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -15,25 +15,23 @@
 
       <canvas class="my-4 w-100" id="myChart" width="900" height="380" hidden></canvas>
 
-      
       <div class="row">
       <?php
               $i = 1;
-              foreach($koskosan as $row):
+              foreach($supplier as $row):
                 if(fmod($i,3)==0){
                   ?> 
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_kos'].")";?>
-                                      <span class="badge bg-primary rounded-pill"><?=$infokosan[$i-1][1]?></span>
-                                      <span class="badge bg-success rounded-pill"><?=$infokosan[$i-1][2]?></span>
-                                      <span class="badge bg-danger rounded-pill"><?=$infokosan[$i-1][3]?></span>
+                                    <h5 class="card-title"><?= ucfirst($row['nama_supplier'])." (ID = ".$row['id_supplier'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['alamat'].' ('.$row['telepon'].')';?>
+                                    <p class="card-text"><?= ucfirst($row['alamat_supplier']).', '.$row['telepon_supplier'];?>
+                                    <br>
+                                    Material: <b><?= ucwords($row['jenis_material'])?></b>
                                     </p>
                                     
-                                    <a href="<?= base_url('laporan/statusbayarperkamar/'.$row['id_kos'].'/'.$row['nama']) ?>" class="btn btn-primary">Lihat Pembayaran Kamar</a>
+                                    <a href="<?= base_url('PemesananSupplier/InputPemesanan/'.$row['id_supplier']) ?>" class="btn btn-primary">Pesan Material</a>
                                 </div>
                             </div>
                         </div>
@@ -46,15 +44,15 @@
                         <div class="col">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?= $row['nama']." (ID = ".$row['id_kos'].")";?>
-                                      <span class="badge bg-primary rounded-pill"><?=$infokosan[$i-1][1]?></span>
-                                      <span class="badge bg-success rounded-pill"><?=$infokosan[$i-1][2]?></span>
-                                      <span class="badge bg-danger rounded-pill"><?=$infokosan[$i-1][3]?></span>
+                                    <h5 class="card-title"><?= ucfirst($row['nama_supplier'])." (ID = ".$row['id_supplier'].")";?>
                                     </h5>
-                                    <p class="card-text"><?= $row['alamat'].' ('.$row['telepon'].')';?>
+                                    <p class="card-text"><?= ucfirst($row['alamat_supplier']).', '.$row['telepon_supplier'];?>
+                                    <br>
+                                    Material: <b><?= ucwords($row['jenis_material'])?></b>
                                     </p>
-                                    <a href="<?= base_url('laporan/statusbayarperkamar/'.$row['id_kos'].'/'.$row['nama']) ?>" class="btn btn-primary">Lihat Pembayaran Kamar</a>
-                                    
+
+                                    <a href="<?= base_url('PemesananSupplier/InputPemesanan/'.$row['id_supplier']) ?>" class="btn btn-primary">Pesan Material</a>
+                                
                                 </div>
                             </div>
                         </div>

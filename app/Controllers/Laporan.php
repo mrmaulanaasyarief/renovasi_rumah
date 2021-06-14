@@ -17,9 +17,9 @@ class Laporan extends BaseController
     //data table pembayaran
     public function tabelpembayaran(){
         //tambahkan pengecekan login
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
 
         $data['pembayaran'] = $this->PembayaranModel->getInfoPembayaran();
 
@@ -31,9 +31,9 @@ class Laporan extends BaseController
     //cetak kuitansi
     public function kuitansi($id_pembayaran, $nama_customer, $sisa_bayar){
         helper('rupiah');
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['kuitansi'] = $this->PembayaranModel->getById($id_pembayaran);
         $data['nama_customer'] = $nama_customer;
         $data['sisa_bayar'] = $sisa_bayar;
@@ -60,9 +60,9 @@ class Laporan extends BaseController
     //cetak kuitansi 2
     public function kuitansi2($id_pembayaran){
         helper('rupiah');
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['kuitansi'] = $this->PembayaranModel->getInfoPembayaranById($id_pembayaran);
         $data['sisa_bayar'] = $this->PembayaranModel->getSisaBayar($id_pembayaran);
         echo view('Laporan/Cetakkuitansi2', $data);
@@ -73,9 +73,9 @@ class Laporan extends BaseController
     //litys kosan
     public function daftarkosan(){
         //tambahkan pengecekan login
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
 
         $data['koskosan'] = $this->kosanmodel->getAll();
 
@@ -101,9 +101,9 @@ class Laporan extends BaseController
 
     //status pembayaran tiap kamar
     public function statusbayarperkamar($id_kos, $namakos){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         helper('rupiah');
         $data['pembayaran'] = $this->PembayaranModel->getInfoPembayaranPerKamar($id_kos);
         $data['namakos'] = $namakos;
@@ -114,9 +114,9 @@ class Laporan extends BaseController
     
     //lihat beban
     public function lihatbeban(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
 
         $data['beban'] = $this->PembebananModel->getListBeban();
         //maka kembalikan ke awal
@@ -127,9 +127,9 @@ class Laporan extends BaseController
 
     //jurnal umum
     public function jurnalumum(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['koskosan'] = $this->kosanmodel->getAll();
         $data['tahun'] = $this->CoaModel->getPeriodeTahun();
         echo view('HeaderBootstrap');
@@ -139,18 +139,18 @@ class Laporan extends BaseController
 
     //json encode untuk list bulan
     public function listbulan($tahun){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         //encode
         echo json_encode($this->CoaModel->getPeriodeBulan($tahun));
     }
 
     //proses lihat jurnal umum
     public function lihatjurnalumum(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['jurnal'] = $this->CoaModel->getJurnalUmum($_POST['tahun'], $_POST['bulan']);
         $data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
         $data['bulan'] = $_POST['bulan'];
@@ -162,9 +162,9 @@ class Laporan extends BaseController
 
     //buku besar
     public function bukubesar(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['koskosan'] = $this->kosanmodel->getAll();
         $data['tahun'] = $this->CoaModel->getPeriodeTahun();
         $data['namaakun'] = $this->CoaModel->getNamaAkun();
@@ -175,9 +175,9 @@ class Laporan extends BaseController
 
     //proses lihat buku besar
     public function lihatbukubesar(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['jurnal'] = $this->CoaModel->getJurnalUmum($_POST['tahun'], $_POST['bulan']);
         $data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
         
@@ -202,9 +202,9 @@ class Laporan extends BaseController
 
     //laba rugi
     public function labarugi(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['koskosan'] = $this->kosanmodel->getAll();
         $data['tahun'] = $this->CoaModel->getPeriodeTahun();
 
@@ -218,9 +218,9 @@ class Laporan extends BaseController
 
     //proses lihat laba rugi
     public function lihatlabarugi(){
-        if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
-        }
+        // if(!isset($_SESSION['nama'])){
+        //     return redirect()->to(base_url('home')); 
+        // }
         $data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
         
 

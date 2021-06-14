@@ -12,6 +12,15 @@ class SupplierModel extends Model
         return $this->findAll();
     }
 
+    public function getById($id){
+        $sql = "SELECT *
+                FROM supplier
+                WHERE id_supplier = ?
+                ";
+        $dbResult = $this->db->query($sql, array($id));
+        return $dbResult->getResult();
+    }
+
     //untuk memasukkan data kos
     public function insertData(){
         $nama = $_POST['nama_supplier'];

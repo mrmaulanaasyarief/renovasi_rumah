@@ -19,7 +19,7 @@
         }
       ?>
         <div class="row">
-        <?= form_open('jasadesain') ?>
+        <?= form_open('JasaDesain') ?>
                 <div class="mb-3">
                     <label for="jenis_jasa_desain" class="form-label">jenis jasa desain</label>
                     <input type="text" class="form-control" id="jenis_jasa_desain" name="jenis_jasa_desain" value="<?= set_value('jenis_jasa_desain')?>" placeholder="Diisi dengan jenis jasa desain">
