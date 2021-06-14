@@ -188,8 +188,10 @@ class PembayaranModel extends Model
         if(($harga_deal-($besar_bayar+$totalbayar))<=0){
             if($jenis_pemesanan == 'Renovasi'){
                 $sql = "UPDATE pemesanan_renovasi SET status_bayar = 'Lunas' WHERE id_pesan =?";
-            }else if($jenis_pemesanan == 'JasaDesain'){
-                $sql = "UPDATE pemesanan_jasadesain SET status_bayar = 'Lunas' WHERE id_pesan =?";
+            }else if($jenis_pemesanan == 'Supplier'){
+                $sql = "UPDATE pemesanan_supplier SET status_bayar = 'Lunas' WHERE id_pesan =?";
+            }else if($jenis_pemesanan == 'Jasa Desain'){
+                $sql = "UPDATE pemesanan_jasa_desain SET status_bayar = 'Lunas' WHERE id_pesan =?";
             }else if($jenis_pemesanan == 'Material'){
                 $sql = "UPDATE pemesanan_material SET status_bayar = 'Lunas' WHERE id_pesan =?";
             }else if($jenis_pemesanan == 'Pegawai'){
