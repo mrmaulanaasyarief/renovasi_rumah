@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\PembayaranModel;
+use App\Models\LaporanModel;
+use App\Models\CoaModel;
 
 class Laporan extends BaseController
 {
@@ -10,6 +12,8 @@ class Laporan extends BaseController
     {
 		session_start();
         $this->PembayaranModel = new PembayaranModel();
+        $this->LaporanModel = new LaporanModel();
+        $this->CoaModel = new CoaModel();
         helper('rupiah');
         helper('waktu');
     }
@@ -17,9 +21,9 @@ class Laporan extends BaseController
     //data table pembayaran
     public function tabelpembayaran(){
         //tambahkan pengecekan login
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
 
         $data['pembayaran'] = $this->PembayaranModel->getInfoPembayaran();
 
@@ -31,9 +35,9 @@ class Laporan extends BaseController
     //cetak kuitansi
     public function kuitansi($id_pembayaran, $nama_customer, $sisa_bayar){
         helper('rupiah');
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
         $data['kuitansi'] = $this->PembayaranModel->getById($id_pembayaran);
         $data['nama_customer'] = $nama_customer;
         $data['sisa_bayar'] = $sisa_bayar;
@@ -127,11 +131,13 @@ class Laporan extends BaseController
 
     //jurnal umum
     public function jurnalumum(){
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
-        $data['koskosan'] = $this->kosanmodel->getAll();
-        $data['tahun'] = $this->CoaModel->getPeriodeTahun();
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+        // $data['laporan'] = $this->LaporanModel->getAll();
+        $data['tahun'] = $this->CoaModel->getPeriodeTahunBulan();
+        //$data['bulan'] = $this->LaporanModel->getPeriodeBulan();
+
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
         echo view('Laporan/Jurnal', $data);
@@ -148,13 +154,16 @@ class Laporan extends BaseController
 
     //proses lihat jurnal umum
     public function lihatjurnalumum(){
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
-        $data['jurnal'] = $this->CoaModel->getJurnalUmum($_POST['tahun'], $_POST['bulan']);
-        $data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
-        $data['bulan'] = $_POST['bulan'];
-        $data['tahun'] = $_POST['tahun'];
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+
+
+        $data['tahun'] = substr($_POST['periode'],0,4);
+        $data['bulan'] = substr($_POST['periode'],5);
+
+        $data['jurnal'] = $this->CoaModel->getJurnalUmum($data['tahun'], $data['bulan']);
+
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
         echo view('Laporan/LihatJurnal', $data);
@@ -162,11 +171,11 @@ class Laporan extends BaseController
 
     //buku besar
     public function bukubesar(){
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
-        $data['koskosan'] = $this->kosanmodel->getAll();
-        $data['tahun'] = $this->CoaModel->getPeriodeTahun();
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+        
+        $data['tahun'] = $this->CoaModel->getPeriodeTahunBulan();
         $data['namaakun'] = $this->CoaModel->getNamaAkun();
         echo view('HeaderBootstrap');
         echo view('SidebarBootstrap');
@@ -175,20 +184,20 @@ class Laporan extends BaseController
 
     //proses lihat buku besar
     public function lihatbukubesar(){
-        // if(!isset($_SESSION['nama'])){
-        //     return redirect()->to(base_url('home')); 
-        // }
-        $data['jurnal'] = $this->CoaModel->getJurnalUmum($_POST['tahun'], $_POST['bulan']);
-        $data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
+        if(!isset($_SESSION['nama'])){
+            return redirect()->to(base_url('home')); 
+        }
+        $data['tahun'] = substr($_POST['periode'],0,4);
+        $data['bulan'] = substr($_POST['periode'],5);
+
+        $data['jurnal'] = $this->CoaModel->getJurnalUmum($data['tahun'], $data['bulan']);
+        //$data['kosan'] = $this->kosanmodel->editData($_POST['namakos']);
         
         $akun = $_POST['akun'];
         //explode untuk mendapatkan kode akun dan nama akun kode_akun|nama_akun
         $akuncacah = explode("|",$akun);
         //print_r($akuncacah);
 
-        
-        $data['bulan'] = $_POST['bulan'];
-        $data['tahun'] = $_POST['tahun'];
         $data['kodeakun'] = $akuncacah[0];
         $data['namaakun'] = $akuncacah[1];
         $data['bukubesar'] = $this->CoaModel->getBukuBesar($data['tahun'], $data['bulan'], $data['kodeakun']);

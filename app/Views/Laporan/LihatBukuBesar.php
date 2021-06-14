@@ -1,10 +1,6 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-       <?php
-            foreach($kosan as $row):
-                $namakosan = $row->nama;
-            endforeach;
-       ?>
+      <?php $namaBulan = array("","Januari","Februaru","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");?>
         <h1 class="h2">Buku Besar</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
@@ -24,9 +20,9 @@
               <div class="col">
                   <div class="card">
                     <div class="card-body">
-                        <div class="text-center">Kosan <b><?=$namakosan;?></b></div>
+                        <div class="text-center"><b>Renovasi Rumah</b></div>
                         <div class="text-center"><b>Buku Besar <?=$namaakun;?></b></div>
-                        <div class="text-center">Periode <b><?=getNamaBulanIndo($bulan);?> <?=$tahun;?></b></div>
+                        <div class="text-center">Periode <b><?=$namaBulan[$bulan+0];?> <?=$tahun;?></b></div>
                     </div>
                   </div>
               </div>

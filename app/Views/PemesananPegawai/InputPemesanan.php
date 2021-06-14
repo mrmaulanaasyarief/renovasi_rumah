@@ -44,7 +44,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="gaji">Tarif Pegawai</label>
-                    <input type="text" class="form-control" id="gaji_" name="gaji_" onchange="changeTotal()" placeholder="Diisi dengan tarif kerja pegawai" >
+                    <input type="text" class="form-control" id="gaji" name="gaji" onchange="changeTotal()" placeholder="Diisi dengan tarif kerja pegawai" >
                 </div>
                 <div class="mb-3">
                     <label for="total_gaji">Total Gaji</label>
@@ -117,7 +117,7 @@
     var gaji = +document.getElementById("gaji").value;
 
     var container = document.getElementById("total_gaji");
-    container.value = gaji;
+    container.value = gaji * jumlah_hari;
 
   }
 </script>

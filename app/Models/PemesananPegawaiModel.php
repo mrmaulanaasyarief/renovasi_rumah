@@ -168,6 +168,34 @@ class PemesananPegawaiModel extends Model
                 );
         }
 
+        //dapatkan id transaksi untuk pembayaran
+        $dbResult = $this->db->query("SELECT IFNULL(MAX(id_pembayaran),0) as id_transaksi from pembayaran");
+
+        $hasil2 = $dbResult->getResult();
+        //cacah hasilnya
+        foreach ($hasil2 as $row)
+        {
+            $id_transaksi = $row->id_transaksi;
+        }
+
+        //pencatatan jurnal pada saat daftar renovasi (piutang pada pendapatan diterima dimuka)
+                $sql = "    INSERT INTO jurnal(`id_transaksi`, `kode_akun`, `tgl_jurnal`, `posisi_d_c`, `nominal`, `kelompok`, `transaksi`)
+                SELECT a.id_pembayaran as id_transaksi, b.kode_akun, a.tgl_bayar, b.posisi, ".$total_gaji." as besar_bayar,b.kelompok,b.transaksi
+                FROM pembayaran a
+                CROSS JOIN transaksi_coa b
+                WHERE a.id_pembayaran = ? AND b.transaksi = 'pembebanan' AND b.kelompok = 2
+        ";
+        $dbResult = $this->db->query($sql, array($id_transaksi));
+
+        //pencatatan jurnal pada saat pembayaran DP (kas pada piutang)
+        $sql = "    INSERT INTO jurnal(`id_transaksi`, `kode_akun`, `tgl_jurnal`, `posisi_d_c`, `nominal`, `kelompok`, `transaksi`)
+                SELECT a.id_pembayaran as id_transaksi, b.kode_akun,a.tgl_bayar,b.posisi,a.besar_bayar,b.kelompok,b.transaksi
+                FROM pembayaran a
+                CROSS JOIN transaksi_coa b
+                WHERE a.id_pembayaran = ? AND b.transaksi = 'pembebanan' AND b.kelompok = 3
+        ";
+        $dbResult = $this->db->query($sql, array($id_transaksi));
+
         return $hasil;
     }
 }

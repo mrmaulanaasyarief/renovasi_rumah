@@ -19,9 +19,9 @@
       <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th>#KTP</th>
+              <th>No</th>
               <th>Nama</th>
-              <th>Kamar</th>
+              <th>Jenis Pemesanan</th>
               <th>Tgl Bayar</th>
               <th>No Kuitansi</th>
               <th>Aksi</th>

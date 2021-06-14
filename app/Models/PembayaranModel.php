@@ -23,15 +23,33 @@ class PembayaranModel extends Model
 
     //method untuk menampilkan informasi data pembayaran
     public function getInfoPembayaran(){
-        $sql = "SELECT c.id as id_penghuni, c.ktp, c.nama as nama_penghuni, e.id_kos, 
-                        e.nama as nama_kos,
-                        CONCAT('Lt ',a.lantai,' (',a.nomer,')') AS kmr, b.status_bayar, d.no_kuitansi,
-                        a.id as id_kamar,d.tgl_bayar,d.besar_bayar,d.id_pembayaran
-                FROM kamar a
-                JOIN pemesanan b ON (a.id=b.id_kamar)
-                JOIN penghuni c ON (b.id_penghuni=c.id)
-                JOIN pembayaran d ON (b.id_pesan=d.id_pemesanan)
-                JOIN kos e ON (a.id_kos=e.id_kos)";
+        $sql = "(SELECT pr.id_pesan, c.nama, pr.harga_deal, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan
+                    FROM customer c
+                JOIN pemesanan_renovasi pr ON pr.id_customer=c.id_customer
+                JOIN pembayaran pb ON pb.id_pemesanan=pr.id_pesan AND pb.jenis_pemesanan='Renovasi')
+                UNION
+                (SELECT pj.id_pesan, c.nama, pj.harga_deal, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan
+                    FROM customer c
+                JOIN pemesanan_renovasi pr ON pr.id_customer=c.id_customer
+                JOIN pemesanan_jasa_desain pj ON pj.id_renovasi=pr.id_pesan
+                JOIN pembayaran pb ON pb.id_pemesanan=pj.id_pesan AND pb.jenis_pemesanan='Jasa Desain')
+                UNION
+                (SELECT pm.id_pesan, c.nama, pm.total_trans, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan
+                    FROM customer c
+                JOIN pemesanan_renovasi pr ON pr.id_customer=c.id_customer
+                JOIN pemesanan_material pm ON pm.id_renovasi=pr.id_pesan
+                JOIN pembayaran pb ON pb.id_pemesanan=pm.id_pesan AND pb.jenis_pemesanan='Material')
+                UNION
+                (SELECT pg.id_pesan, c.nama, pg.total_gaji, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan
+                    FROM customer c
+                JOIN pemesanan_renovasi pr ON pr.id_customer=c.id_customer
+                JOIN pemesanan_pegawai pg ON pg.id_renovasi=pr.id_pesan
+                JOIN pembayaran pb ON pb.id_pemesanan=pg.id_pesan AND pb.jenis_pemesanan='Pegawai')
+                UNION
+                (SELECT ps.id_pesan, s.nama_supplier, ps.total_harga, pb.no_kuitansi, pb.tgl_bayar, pb.besar_bayar, pb.jenis_pemesanan
+                    FROM supplier s
+                JOIN pemesanan_supplier ps ON ps.id_supplier=s.id_supplier
+                JOIN pembayaran pb ON pb.id_pemesanan=ps.id_pesan AND pb.jenis_pemesanan='Supplier')";
         $dbResult = $this->db->query($sql);
         return $dbResult->getResult();        
     }

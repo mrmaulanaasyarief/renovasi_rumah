@@ -49,8 +49,8 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="<?= base_url('laporan/bukubesar') ?>">Buku Besar</a></li>
               <li><a class="dropdown-item" href="<?= base_url('laporan/jurnalumum') ?>">Jurnal Umum</a></li>
-              <!-- <li><a class="dropdown-item" href="<?= base_url('laporan/tabelpembayaran') ?>">Kuitansi</a></li>
-              <li><a class="dropdown-item" href="<?= base_url('laporan/labarugi') ?>">Laba Rugi</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('laporan/tabelpembayaran') ?>">Kuitansi</a></li>
+              <!-- <li><a class="dropdown-item" href="<?= base_url('laporan/labarugi') ?>">Laba Rugi</a></li>
               <li><a class="dropdown-item" href="<?= base_url('laporan/daftarkosan') ?>">Pembayaran</a></li>
               <li><a class="dropdown-item" href="<?= base_url('pemodalan/listpemodalan') ?>">Pemodalan</a></li>
               <li><a class="dropdown-item" href="<?= base_url('laporan/lihatbeban') ?>">Pembebanan</a></li> -->

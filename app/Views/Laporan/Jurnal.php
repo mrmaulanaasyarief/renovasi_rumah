@@ -23,33 +23,21 @@
       ?>
         <div class="row">
         <form action="<?= base_url('laporan/lihatjurnalumum') ?>" method="post">
-            
                 <div class="mb-3">
-                    <label for="namakos" class="form-label">Kos</label>
-                        <select class="form-select" aria-label="Default select example" name="namakos">
-                            <?php
-                                foreach($koskosan as $row):
-                                    $id_kos = $row['id_kos'];
-                                    $nama = $row['nama'];
-                                    ?>
-                                        <option value="<?=$id_kos?>"><?=$nama?></option>
-                                    <?php
-                                endforeach;
-                            ?>
-                        </select>
-                </div>
-                <div class="mb-3">
-                    <label for="tahun" class="form-label">Tahun</label>
-                        <select class="form-select" aria-label="Default select example" name="tahun" id="tahun">
-                            <?php
-                                foreach($tahun as $row):
-                                    $tahun = $row->tahun;
-                                    ?>
-                                        <option value="<?=$tahun?>"><?=$tahun?></option>
-                                    <?php
-                                endforeach;
-                            ?>
-                        </select>
+                    <label for="periode" class="form-label">Periode</label>
+                    <select class="form-select" aria-label="Default select example" name="periode" id="periode">
+                        <?php
+                            foreach($tahun as $row):
+                                $namaBulan = array("","Januari","Februaru","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember");
+                                $tahun = $row->tahun;
+                                $bulan = $row->bulan;
+                                $bulan_angka = $row->bulan_angka;
+                                ?>
+                                    <option value="<?=$tahun.'-'.$bulan_angka?>"><?=$namaBulan[$bulan_angka+0].' '.$tahun?></option>
+                                <?php
+                            endforeach;
+                        ?>
+                    </select>
                 </div>
                 <div id="x"></div>
 

@@ -36,6 +36,9 @@ class Database extends Config
 		'username' => 'root',
 		'password' => '',
 		'database' => 'renovasi_rumah',
+		// 'username' => 'id17043969_renovasi_rumah_user',
+		// 'password' => '1\8+45GH\XTg6$Q/',
+		// 'database' => 'id17043969_renovasi_rumah',
 		'DBDriver' => 'MySQLi',
 		'DBPrefix' => '',
 		'pConnect' => false,
@@ -46,6 +49,7 @@ class Database extends Config
 		'encrypt'  => false,
 		'compress' => false,
 		'strictOn' => false,
+		// 'strictOn' => true,
 		'failover' => [],
 		'port'     => 3306,
 	];

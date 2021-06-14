@@ -17,11 +17,19 @@ class Home extends BaseController
 	public function index()
 	{
 		if(!isset($_SESSION['nama'])){
-            return redirect()->to(base_url('home')); 
+            return view('login'); 
         }
 		echo view('HeaderBootstrap');
 		echo view('SidebarBootstrap');
 		echo view('BodyBootstrap');
+	}
+
+	public function logout()
+	{
+		if(isset($_SESSION['nama'])){
+			$_SESSION['nama']=NULL;
+        }
+		return view('login');
 	}
 
 	public function ceklogin()

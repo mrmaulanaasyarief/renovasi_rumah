@@ -91,6 +91,7 @@
     <script>
 		$(document).ready(function(){
 			// Format mata uang.
+			$('#harga_awal').mask('0,000,000,000,000,000', {reverse: true});			
 			$('#besar_bayar').mask('0,000,000,000,000,000', {reverse: true});			
       $('#harga_deal').mask('0,000,000,000,000,000', {reverse: true});	
 			
